@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "604119463829",
+    "firebase_url": "https://conmi-app.firebaseio.com",
+    "project_id": "conmi-app",
+    "storage_bucket": "conmi-app.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:604119463829:android:429ef0a6a95aaaadff289c",
+        "android_client_info": {
+          "package_name": "com.example.conmi"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "604119463829-v5smhvm0q043iqmac8mqlndqakj7vfi4.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBChuidf5hw2vFwgdjnp_x0QJkIDco_yI4"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "604119463829-v5smhvm0q043iqmac8mqlndqakj7vfi4.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
