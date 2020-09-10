@@ -11,7 +11,7 @@ class CreateEventStep1 extends StatefulWidget {
 }
 
 class _CreateEventStep1State extends State<CreateEventStep1> {
-  @override
+    @override
   Widget build(BuildContext context) {
     return Scaffold(
       body: MainContainer(

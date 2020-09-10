@@ -4,14 +4,17 @@ import 'package:step_progress_indicator/step_progress_indicator.dart';
 import 'package:flutter/animation.dart';
 
 class BottomBar extends StatefulWidget {
-  const BottomBar({Key key}) : super(key: key);
+  int step = 0;
+  BottomBar({this.step = 0, Key key}) : super(key: key);
 
-  _BottomBarState createState() => _BottomBarState();
+  _BottomBarState createState() => _BottomBarState(this.step);
 }
 
 class _BottomBarState extends State<BottomBar> with SingleTickerProviderStateMixin {
   Animation<double> animation;
   AnimationController controller;
+  int step = 0;
+  _BottomBarState(this.step);
 
   @override
   void initState() {
@@ -21,7 +24,7 @@ class _BottomBarState extends State<BottomBar> with SingleTickerProviderStateMix
       vsync: this,
     );
     final Animation curve = CurvedAnimation(parent: controller, curve: Curves.easeOutQuart);
-    animation = Tween<double>(begin: 1, end: 90).animate(curve);
+    animation = Tween<double>(begin: (step-1)*90.0, end: step*90.0).animate(curve);
   }
 
   @override

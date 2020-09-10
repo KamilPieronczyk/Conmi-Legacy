@@ -1,4 +1,5 @@
 import 'package:conmi/screens/createEvent/screateEventStep1/CreateEventStep1.dart';
+import 'package:conmi/screens/createEvent/createEventStep3/CreateEventStep3.dart';
 import 'package:conmi/utils/Colors.dart';
 import 'package:firebase_analytics/firebase_analytics.dart';
 import 'package:flutter/material.dart';
@@ -21,7 +22,7 @@ class MyApp extends StatelessWidget {
         primarySwatch: Colors.blue,
         visualDensity: VisualDensity.adaptivePlatformDensity,
       ),
-      home: CreateEventStep1(),
+      home: CreateEventStep3(),
     );
   }
 }
