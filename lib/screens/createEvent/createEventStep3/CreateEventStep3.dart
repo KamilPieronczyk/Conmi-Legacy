@@ -2,6 +2,7 @@ import 'package:conmi/screens/createEvent/local_widgets/BottomBar.dart';
 import 'package:conmi/screens/createEvent/local_widgets/MainContainer.dart';
 import 'package:conmi/screens/createEvent/local_widgets/TopTitle.dart';
 import 'package:conmi/utils/Colors.dart';
+import 'package:conmi/utils/StringsPL.dart';
 import 'package:conmi/widgets/ConmiFontStyle.dart';
 import 'package:conmi/widgets/Shadow.dart';
 import 'package:flutter/material.dart';
@@ -19,7 +20,7 @@ class _CreateEventStep3State extends State<CreateEventStep3> {
       body: MainContainer(
         Column(
           children: <Widget>[
-            TopTitle("Zaproś znajomych"),
+            TopTitle(StringsPL.createEventInviteFriends),
             Expanded(
               child: Container(
                 margin: EdgeInsets.fromLTRB(0, 25, 0, 0),
@@ -65,7 +66,7 @@ class _CreateEventStep3State extends State<CreateEventStep3> {
                             child: Row(
                               children: [
                                 Text(
-                                  'UDOSTĘPNIJ',
+                                  StringsPL.createEventShare,
                                   style: TextStyle(
                                       color: ConmiColor().purple,
                                       fontSize: 20,

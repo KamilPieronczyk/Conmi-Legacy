@@ -2,6 +2,7 @@ import 'package:conmi/screens/createEvent/local_widgets/BottomBar.dart';
 import 'package:conmi/screens/createEvent/local_widgets/MainContainer.dart';
 import 'package:conmi/screens/createEvent/local_widgets/TopTitle.dart';
 import 'package:conmi/utils/Colors.dart';
+import 'package:conmi/utils/StringsPL.dart';
 import 'package:flutter/material.dart';
 
 class CreateEventStep1 extends StatefulWidget {
@@ -17,12 +18,12 @@ class _CreateEventStep1State extends State<CreateEventStep1> {
       body: MainContainer(
         Column(
           children: <Widget>[
-            TopTitle("Nazwij swoje nowe wydarzenie"),
+            TopTitle(StringsPL.createEventSetEventName),
             Expanded(
               child: Center(
                 child: TextFormField(
                   decoration: InputDecoration(
-                    hintText: 'Nazwa wydarzenia',
+                    hintText: StringsPL.createEventTextFieldHint,
                     focusedBorder: new UnderlineInputBorder(
                       borderSide: BorderSide(
                         color: ConmiColor().purple,
@@ -33,7 +34,7 @@ class _CreateEventStep1State extends State<CreateEventStep1> {
                 ),
               ),
             ),
-            BottomBar(),
+            BottomBar(step: 1),
           ],
         ),
       ),

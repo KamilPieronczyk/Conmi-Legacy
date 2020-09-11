@@ -1,3 +1,4 @@
+import 'package:conmi/screens/createEvent/createEventStep2/CreateEventStep2.dart';
 import 'package:conmi/screens/createEvent/screateEventStep1/CreateEventStep1.dart';
 import 'package:conmi/screens/createEvent/createEventStep3/CreateEventStep3.dart';
 import 'package:conmi/utils/Colors.dart';
@@ -22,7 +23,7 @@ class MyApp extends StatelessWidget {
         primarySwatch: Colors.blue,
         visualDensity: VisualDensity.adaptivePlatformDensity,
       ),
-      home: CreateEventStep3(),
+      home: CreateEventStep2(),
     );
   }
 }
