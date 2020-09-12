@@ -1,3 +1,4 @@
+import 'package:conmi/screens/createEvent/createEventStep2/ImageCarousel/ImageCarousel.dart';
 import 'package:conmi/screens/createEvent/local_widgets/BottomBar.dart';
 import 'package:conmi/screens/createEvent/local_widgets/MainContainer.dart';
 import 'package:conmi/screens/createEvent/local_widgets/TopTitle.dart';
@@ -61,10 +62,13 @@ class _CreateEventStep2State extends State<CreateEventStep2> {
                         )
                       ],
                       alignment: Alignment.topCenter,
-                    )
+                    ),
+                    Expanded(
+                      child: ImageCarousel(),
+                      ),
                   ],
                 ),
-                margin: EdgeInsets.fromLTRB(0, 30, 0, 0),
+                margin: EdgeInsets.fromLTRB(0, 40, 0, 0),
               ),
             ),
             BottomBar(step: 2),
