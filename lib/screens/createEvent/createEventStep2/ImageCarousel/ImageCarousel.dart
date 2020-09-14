@@ -1,4 +1,5 @@
 import 'package:conmi/screens/createEvent/createEventStep2/ImageCarousel/SingleImageTile.dart';
+import 'package:conmi/utils/CarouselImageList.dart';
 import 'package:flutter/material.dart';
 import 'package:carousel_slider/carousel_slider.dart';
 
@@ -16,7 +17,7 @@ class _ImageCarouselState extends State<ImageCarousel> {
         options: CarouselOptions(
           height: 300.0,
         ),
-        items: [1].map((i) {
+        items: [1].map((image) {
           return Builder(
             builder: (BuildContext context) {
               return Container(
@@ -26,14 +27,20 @@ class _ImageCarouselState extends State<ImageCarousel> {
                   children: [
                     Expanded(
                       child: Row(
-                        children: [SingleImageTile(), SingleImageTile()],
+                        children: [
+                          SingleImageTile(conmiImage: CarouselImageList.images[0]),
+                          SingleImageTile(conmiImage: CarouselImageList.images[1])
+                        ],
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         crossAxisAlignment: CrossAxisAlignment.stretch,
                       ),
                     ),
                     Expanded(
                       child: Row(
-                        children: [SingleImageTile(), SingleImageTile()],
+                        children: [
+                          SingleImageTile(conmiImage: CarouselImageList.images[2]),
+                          SingleImageTile(conmiImage: CarouselImageList.images[3])
+                        ],
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         crossAxisAlignment: CrossAxisAlignment.stretch,
                       ),

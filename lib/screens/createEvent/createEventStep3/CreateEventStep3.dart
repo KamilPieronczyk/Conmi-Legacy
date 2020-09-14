@@ -1,3 +1,4 @@
+import 'package:conmi/models/CreateEventData.dart';
 import 'package:conmi/screens/createEvent/createEventStep2/CreateEventStep2.dart';
 import 'package:conmi/screens/createEvent/local_widgets/BottomBar.dart';
 import 'package:conmi/screens/createEvent/local_widgets/MainContainer.dart';
@@ -7,6 +8,7 @@ import 'package:conmi/utils/StringsPL.dart';
 import 'package:conmi/widgets/ConmiFontStyle.dart';
 import 'package:conmi/widgets/Shadow.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 
 class CreateEventStep3 extends StatefulWidget {
   CreateEventStep3({Key key}) : super(key: key);
@@ -17,6 +19,7 @@ class CreateEventStep3 extends StatefulWidget {
 class _CreateEventStep3State extends State<CreateEventStep3> {
   @override
   Widget build(BuildContext context) {
+    final eventName = Provider.of<CreateEventData>(context, listen: false).eventName;
     return Scaffold(
       body: MainContainer(
         Column(
@@ -51,7 +54,7 @@ class _CreateEventStep3State extends State<CreateEventStep3> {
                           tag: 'Text',
                           child: Container(
                             child: Center(
-                              child: ConmiFontStyle.robotoBold16("Wyjazd"),
+                              child: ConmiFontStyle.robotoBold16('$eventName'),
                             ),
                             transform: Matrix4.translationValues(0, -18, 0),
                             height: 36,
