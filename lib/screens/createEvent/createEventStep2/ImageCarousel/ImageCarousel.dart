@@ -22,19 +22,23 @@ class _ImageCarouselState extends State<ImageCarousel> {
               return Container(
                 width: MediaQuery.of(context).size.width,
                 margin: EdgeInsets.symmetric(horizontal: 5.0),
-                decoration: BoxDecoration(color: Colors.amber),
                 child: Column(
                   children: [
-                    Row(
-                      children: [SingleImageTile(), SingleImageTile()],
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    Expanded(
+                      child: Row(
+                        children: [SingleImageTile(), SingleImageTile()],
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        crossAxisAlignment: CrossAxisAlignment.stretch,
+                      ),
                     ),
-                    Row(
-                      children: [SingleImageTile(), SingleImageTile()],
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    Expanded(
+                      child: Row(
+                        children: [SingleImageTile(), SingleImageTile()],
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        crossAxisAlignment: CrossAxisAlignment.stretch,
+                      ),
                     )
                   ],
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 ),
                 height: 150,
               );

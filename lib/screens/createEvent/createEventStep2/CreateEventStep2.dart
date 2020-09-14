@@ -2,12 +2,10 @@ import 'package:conmi/screens/createEvent/createEventStep2/ImageCarousel/ImageCa
 import 'package:conmi/screens/createEvent/local_widgets/BottomBar.dart';
 import 'package:conmi/screens/createEvent/local_widgets/MainContainer.dart';
 import 'package:conmi/screens/createEvent/local_widgets/TopTitle.dart';
-import 'package:conmi/utils/Colors.dart';
 import 'package:conmi/utils/StringsPL.dart';
 import 'package:conmi/widgets/ConmiFontStyle.dart';
 import 'package:conmi/widgets/Shadow.dart';
 import 'package:flutter/material.dart';
-import 'package:carousel_slider/carousel_slider.dart';
 
 class CreateEventStep2 extends StatefulWidget {
   CreateEventStep2({Key key}) : super(key: key);

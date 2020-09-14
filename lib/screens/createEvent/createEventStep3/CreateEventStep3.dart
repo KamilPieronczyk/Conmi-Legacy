@@ -58,6 +58,7 @@ class _CreateEventStep3State extends State<CreateEventStep3> {
                           ),
                         )
                       ],
+                      mainAxisSize: MainAxisSize.max,
                     ),
                     Expanded(
                       child: Column(
