@@ -31,6 +31,21 @@ class _BottomBarState extends State<BottomBar> with SingleTickerProviderStateMix
     animation = Tween<double>(begin: (step - 1) * 90.0, end: step * 90.0).animate(curve);
   }
 
+  void navigateToNextScreen(BuildContext context) {
+    controller.forward().then((value) => {
+          Navigator.push(
+            context,
+            MaterialPageRoute(
+              builder: (context) => nextScreen,
+            ),
+          )
+        });
+  }
+
+  void navigateToPreviousScreen(BuildContext context) {
+    controller.reverse().then((value) => {Navigator.pop(context)});
+  }
+
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -40,9 +55,7 @@ class _BottomBarState extends State<BottomBar> with SingleTickerProviderStateMix
             children: <Widget>[
               IconButton(
                 icon: Icon(Icons.arrow_back, color: ConmiColor().purple, size: 36.0),
-                onPressed: () {
-                  controller.reverse().then((value) => {Navigator.pop(context)});
-                },
+                onPressed: () => this.navigateToPreviousScreen(context),
               ),
               Center(
                 child: Ink(
@@ -61,18 +74,7 @@ class _BottomBarState extends State<BottomBar> with SingleTickerProviderStateMix
                   child: IconButton(
                     icon: Icon(Icons.done),
                     color: Colors.white,
-                    onPressed: () {
-                      controller.forward().then(
-                            (value) => {
-                              Navigator.push(
-                                context,
-                                MaterialPageRoute(
-                                  builder: (context) => nextScreen,
-                                ),
-                              )
-                            },
-                          );
-                    },
+                    onPressed: () => this.navigateToNextScreen(context),
                   ),
                 ),
               ),
