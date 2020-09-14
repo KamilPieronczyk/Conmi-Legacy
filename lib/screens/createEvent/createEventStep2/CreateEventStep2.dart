@@ -1,4 +1,6 @@
+import 'package:conmi/screens/createEvent/createEventStep1/CreateEventStep1.dart';
 import 'package:conmi/screens/createEvent/createEventStep2/ImageCarousel/ImageCarousel.dart';
+import 'package:conmi/screens/createEvent/createEventStep3/CreateEventStep3.dart';
 import 'package:conmi/screens/createEvent/local_widgets/BottomBar.dart';
 import 'package:conmi/screens/createEvent/local_widgets/MainContainer.dart';
 import 'package:conmi/screens/createEvent/local_widgets/TopTitle.dart';
@@ -31,31 +33,36 @@ class _CreateEventStep2State extends State<CreateEventStep2> {
                       children: [
                         Padding(
                           padding: const EdgeInsets.fromLTRB(30, 0, 30, 0),
-                          child: Container(
-                            child: ClipRRect(
-                              child: Image(
-                                image: AssetImage('assets/images/lake.jpg'),
-                                height: 140,
-                                fit: BoxFit.fitHeight,
-                              ),
-                              borderRadius: BorderRadius.circular(14),
-                            ),
-                            decoration: BoxDecoration(
+                          child: Hero(
+                            tag: 'Image',
+                            child: Container(
+                              child: ClipRRect(
+                                child: Image(
+                                  image: AssetImage('assets/images/lake.jpg'),
+                                  height: 140,
+                                  fit: BoxFit.fitHeight,
+                                ),
                                 borderRadius: BorderRadius.circular(14),
-                                boxShadow: [Shadow.get()]),
+                              ),
+                              decoration:
+                                  BoxDecoration(borderRadius: BorderRadius.circular(14), boxShadow: [Shadow.get()]),
+                            ),
                           ),
                         ),
-                        Container(
-                          child: Center(
-                            child: ConmiFontStyle.robotoBold16("Wyjazd"),
-                          ),
-                          transform: Matrix4.translationValues(0, -18, 0),
-                          height: 36,
-                          width: 210,
-                          decoration: BoxDecoration(
-                            color: Colors.white,
-                            borderRadius: BorderRadius.circular(14),
-                            boxShadow: [Shadow.get()],
+                        Hero(
+                          tag: 'Text',
+                          child: Container(
+                            child: Center(
+                              child: ConmiFontStyle.robotoBold16("Wyjazd"),
+                            ),
+                            transform: Matrix4.translationValues(0, -18, 0),
+                            height: 36,
+                            width: 210,
+                            decoration: BoxDecoration(
+                              color: Colors.white,
+                              borderRadius: BorderRadius.circular(14),
+                              boxShadow: [Shadow.get()],
+                            ),
                           ),
                         )
                       ],
@@ -63,13 +70,13 @@ class _CreateEventStep2State extends State<CreateEventStep2> {
                     ),
                     Expanded(
                       child: ImageCarousel(),
-                      ),
+                    ),
                   ],
                 ),
                 margin: EdgeInsets.fromLTRB(0, 40, 0, 0),
               ),
             ),
-            BottomBar(step: 2),
+            BottomBar(step: 2, previousScreen: CreateEventStep1(), nextScreen: CreateEventStep3()),
           ],
         ),
       ),

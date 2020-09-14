@@ -1,3 +1,5 @@
+import 'package:conmi/models/CreateEventData.dart';
+import 'package:conmi/screens/createEvent/createEventStep2/CreateEventStep2.dart';
 import 'package:conmi/screens/createEvent/local_widgets/BottomBar.dart';
 import 'package:conmi/screens/createEvent/local_widgets/MainContainer.dart';
 import 'package:conmi/screens/createEvent/local_widgets/TopTitle.dart';
@@ -12,7 +14,8 @@ class CreateEventStep1 extends StatefulWidget {
 }
 
 class _CreateEventStep1State extends State<CreateEventStep1> {
-    @override
+  _CreateEventStep1State();
+  @override
   Widget build(BuildContext context) {
     return Scaffold(
       body: MainContainer(
@@ -34,7 +37,7 @@ class _CreateEventStep1State extends State<CreateEventStep1> {
                 ),
               ),
             ),
-            BottomBar(step: 1),
+            BottomBar(step: 1, nextScreen: CreateEventStep2()),
           ],
         ),
       ),

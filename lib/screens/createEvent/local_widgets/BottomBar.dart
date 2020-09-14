@@ -5,16 +5,20 @@ import 'package:flutter/animation.dart';
 
 class BottomBar extends StatefulWidget {
   int step = 0;
-  BottomBar({this.step = 0, Key key}) : super(key: key);
+  Widget previousScreen;
+  Widget nextScreen;
+  BottomBar({this.step = 0, this.nextScreen, this.previousScreen, Key key}) : super(key: key);
 
-  _BottomBarState createState() => _BottomBarState(this.step);
+  _BottomBarState createState() => _BottomBarState(this.step, this.nextScreen, this.previousScreen);
 }
 
 class _BottomBarState extends State<BottomBar> with SingleTickerProviderStateMixin {
   Animation<double> animation;
   AnimationController controller;
+  Widget previousScreen;
+  Widget nextScreen;
   int step = 0;
-  _BottomBarState(this.step);
+  _BottomBarState(this.step, this.nextScreen, this.previousScreen);
 
   @override
   void initState() {
@@ -24,7 +28,7 @@ class _BottomBarState extends State<BottomBar> with SingleTickerProviderStateMix
       vsync: this,
     );
     final Animation curve = CurvedAnimation(parent: controller, curve: Curves.easeOutQuart);
-    animation = Tween<double>(begin: (step-1)*90.0, end: step*90.0).animate(curve);
+    animation = Tween<double>(begin: (step - 1) * 90.0, end: step * 90.0).animate(curve);
   }
 
   @override
@@ -37,7 +41,7 @@ class _BottomBarState extends State<BottomBar> with SingleTickerProviderStateMix
               IconButton(
                 icon: Icon(Icons.arrow_back, color: ConmiColor().purple, size: 36.0),
                 onPressed: () {
-                  controller.reverse();
+                  controller.reverse().then((value) => {Navigator.pop(context)});
                 },
               ),
               Center(
@@ -58,7 +62,16 @@ class _BottomBarState extends State<BottomBar> with SingleTickerProviderStateMix
                     icon: Icon(Icons.done),
                     color: Colors.white,
                     onPressed: () {
-                      controller.forward();
+                      controller.forward().then(
+                            (value) => {
+                              Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                  builder: (context) => nextScreen,
+                                ),
+                              )
+                            },
+                          );
                     },
                   ),
                 ),

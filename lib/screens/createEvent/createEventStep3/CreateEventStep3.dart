@@ -1,3 +1,4 @@
+import 'package:conmi/screens/createEvent/createEventStep2/CreateEventStep2.dart';
 import 'package:conmi/screens/createEvent/local_widgets/BottomBar.dart';
 import 'package:conmi/screens/createEvent/local_widgets/MainContainer.dart';
 import 'package:conmi/screens/createEvent/local_widgets/TopTitle.dart';
@@ -30,31 +31,36 @@ class _CreateEventStep3State extends State<CreateEventStep3> {
                       children: [
                         Padding(
                           padding: const EdgeInsets.fromLTRB(30, 0, 30, 0),
-                          child: Container(
-                            child: ClipRRect(
-                              child: Image(
-                                image: AssetImage('assets/images/lake.jpg'),
-                                height: 260,
-                                fit: BoxFit.fitHeight,
-                              ),
-                              borderRadius: BorderRadius.circular(14),
-                            ),
-                            decoration: BoxDecoration(
+                          child: Hero(
+                            tag: 'Image',
+                            child: Container(
+                              child: ClipRRect(
+                                child: Image(
+                                  image: AssetImage('assets/images/lake.jpg'),
+                                  height: 260,
+                                  fit: BoxFit.fitHeight,
+                                ),
                                 borderRadius: BorderRadius.circular(14),
-                                boxShadow: [Shadow.get()]),
+                              ),
+                              decoration:
+                                  BoxDecoration(borderRadius: BorderRadius.circular(14), boxShadow: [Shadow.get()]),
+                            ),
                           ),
                         ),
-                        Container(
-                          child: Center(
-                            child: ConmiFontStyle.robotoBold16("Wyjazd"),
-                          ),
-                          transform: Matrix4.translationValues(0, -18, 0),
-                          height: 36,
-                          width: 210,
-                          decoration: BoxDecoration(
-                            color: Colors.white,
-                            borderRadius: BorderRadius.circular(14),
-                            boxShadow: [Shadow.get()],
+                        Hero(
+                          tag: 'Text',
+                          child: Container(
+                            child: Center(
+                              child: ConmiFontStyle.robotoBold16("Wyjazd"),
+                            ),
+                            transform: Matrix4.translationValues(0, -18, 0),
+                            height: 36,
+                            width: 210,
+                            decoration: BoxDecoration(
+                              color: Colors.white,
+                              borderRadius: BorderRadius.circular(14),
+                              boxShadow: [Shadow.get()],
+                            ),
                           ),
                         )
                       ],
@@ -69,9 +75,7 @@ class _CreateEventStep3State extends State<CreateEventStep3> {
                                 Text(
                                   StringsPL.createEventShare,
                                   style: TextStyle(
-                                      color: ConmiColor().purple,
-                                      fontSize: 20,
-                                      fontWeight: FontWeight.normal),
+                                      color: ConmiColor().purple, fontSize: 20, fontWeight: FontWeight.normal),
                                 ),
                                 Icon(
                                   Icons.share,
@@ -81,19 +85,17 @@ class _CreateEventStep3State extends State<CreateEventStep3> {
                               mainAxisSize: MainAxisSize.min,
                               mainAxisAlignment: MainAxisAlignment.center,
                             ),
-                            onPressed: (){},
+                            onPressed: () {},
                           ),
                           Padding(
-                            padding: const EdgeInsets.only(top:10),
+                            padding: const EdgeInsets.only(top: 10),
                             child: FlatButton(
-                               child: Row(
+                              child: Row(
                                 children: [
                                   Text(
                                     'conmiblabla.app./dupa123',
                                     style: TextStyle(
-                                        color: ConmiColor().blackText,
-                                        fontSize: 20,
-                                        fontWeight: FontWeight.normal),
+                                        color: ConmiColor().blackText, fontSize: 20, fontWeight: FontWeight.normal),
                                   ),
                                   Padding(
                                     padding: const EdgeInsets.fromLTRB(7, 10, 0, 10),
@@ -109,10 +111,10 @@ class _CreateEventStep3State extends State<CreateEventStep3> {
                               shape: RoundedRectangleBorder(
                                 side: BorderSide(
                                   color: ConmiColor().purple,
-                                  ),
+                                ),
                                 borderRadius: BorderRadius.circular(5),
                               ),
-                              onPressed: (){},
+                              onPressed: () {},
                             ),
                           )
                         ],
@@ -123,7 +125,7 @@ class _CreateEventStep3State extends State<CreateEventStep3> {
                 ),
               ),
             ),
-            BottomBar(step: 3),
+            BottomBar(step: 3, previousScreen: CreateEventStep2()),
           ],
         ),
       ),
