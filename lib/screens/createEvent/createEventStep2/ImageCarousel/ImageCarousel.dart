@@ -17,7 +17,7 @@ class _ImageCarouselState extends State<ImageCarousel> {
         options: CarouselOptions(
           height: 300.0,
         ),
-        items: [1].map((image) {
+        items: [1,2,3].map((image) {
           return Builder(
             builder: (BuildContext context) {
               return Container(
