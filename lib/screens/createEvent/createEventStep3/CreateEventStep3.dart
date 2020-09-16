@@ -1,3 +1,4 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:conmi/models/CreateEventData.dart';
 import 'package:conmi/screens/createEvent/createEventStep2/CreateEventStep2.dart';
 import 'package:conmi/screens/createEvent/local_widgets/BottomBar.dart';
@@ -16,10 +17,19 @@ class CreateEventStep3 extends StatefulWidget {
   _CreateEventStep3State createState() => _CreateEventStep3State();
 }
 
+void pushEventToFirebase(BuildContext context){
+final eventData = Provider.of<CreateEventData>(context, listen: false);
+FirebaseFirestore.instance.collection("Events").add({
+  "eventName" : eventData.eventName,
+  "eventImage" : eventData.image.id,
+}).then((value) => print("Succes!"));
+}
+
 class _CreateEventStep3State extends State<CreateEventStep3> {
   @override
   Widget build(BuildContext context) {
-    final eventName = Provider.of<CreateEventData>(context, listen: false).eventName;
+    final eventName =
+        Provider.of<CreateEventData>(context, listen: false).eventName;
     return Scaffold(
       body: MainContainer(
         Column(
@@ -36,17 +46,21 @@ class _CreateEventStep3State extends State<CreateEventStep3> {
                           padding: const EdgeInsets.fromLTRB(30, 0, 30, 0),
                           child: Hero(
                             tag: 'Image',
-                            child: Container(
-                              child: ClipRRect(
-                                child: Image(
-                                  image: AssetImage('assets/images/lake.jpg'),
-                                  height: 260,
-                                  fit: BoxFit.fitHeight,
+                            child: AspectRatio(
+                              aspectRatio: 1,
+                              child: Container(
+                                child: ClipRRect(
+                                  child: Image(
+                                    image: AssetImage(Provider.of<CreateEventData>(context, listen: false).image.path),
+                                    height: 260,
+                                    fit: BoxFit.cover,
+                                  ),
+                                  borderRadius: BorderRadius.circular(14),
                                 ),
-                                borderRadius: BorderRadius.circular(14),
+                                decoration: BoxDecoration(
+                                    borderRadius: BorderRadius.circular(14),
+                                    boxShadow: [Shadow.get()]),
                               ),
-                              decoration:
-                                  BoxDecoration(borderRadius: BorderRadius.circular(14), boxShadow: [Shadow.get()]),
                             ),
                           ),
                         ),
@@ -78,7 +92,9 @@ class _CreateEventStep3State extends State<CreateEventStep3> {
                                 Text(
                                   StringsPL.createEventShare,
                                   style: TextStyle(
-                                      color: ConmiColor().purple, fontSize: 20, fontWeight: FontWeight.normal),
+                                      color: ConmiColor().purple,
+                                      fontSize: 20,
+                                      fontWeight: FontWeight.normal),
                                 ),
                                 Icon(
                                   Icons.share,
@@ -88,7 +104,9 @@ class _CreateEventStep3State extends State<CreateEventStep3> {
                               mainAxisSize: MainAxisSize.min,
                               mainAxisAlignment: MainAxisAlignment.center,
                             ),
-                            onPressed: () {},
+                            onPressed: () {
+                              pushEventToFirebase(context);
+                            },
                           ),
                           Padding(
                             padding: const EdgeInsets.only(top: 10),
@@ -98,10 +116,13 @@ class _CreateEventStep3State extends State<CreateEventStep3> {
                                   Text(
                                     'conmiblabla.app./dupa123',
                                     style: TextStyle(
-                                        color: ConmiColor().blackText, fontSize: 20, fontWeight: FontWeight.normal),
+                                        color: ConmiColor().blackText,
+                                        fontSize: 20,
+                                        fontWeight: FontWeight.normal),
                                   ),
                                   Padding(
-                                    padding: const EdgeInsets.fromLTRB(7, 10, 0, 10),
+                                    padding:
+                                        const EdgeInsets.fromLTRB(7, 10, 0, 10),
                                     child: Icon(
                                       Icons.content_copy,
                                       color: ConmiColor().blackText,

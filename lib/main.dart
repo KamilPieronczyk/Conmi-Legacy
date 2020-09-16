@@ -8,10 +8,10 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:provider/provider.dart';
 import 'models/CreateEventData.dart';
+import 'package:firebase_core/firebase_core.dart';
 
-FirebaseAnalytics analytics;
 void main() {
-  analytics = FirebaseAnalytics();
+  WidgetsFlutterBinding.ensureInitialized();
   runApp(
     MultiProvider(
       providers: [
@@ -23,21 +23,51 @@ void main() {
 }
 
 class MyApp extends StatelessWidget {
-  // This widget is the root of your application.
+  final Future<FirebaseApp> _initialization = Firebase.initializeApp();
+
+// This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
-    return BlocProvider<CreateEventBloc>(
-      create: (context) => CreateEventBloc(),
-      child: MaterialApp(
-        title: 'Conmi',
-        theme: ThemeData(
-          primaryColor: ConmiColor().primary,
-          secondaryHeaderColor: ConmiColor().secondary,
-          primarySwatch: Colors.blue,
-          visualDensity: VisualDensity.adaptivePlatformDensity,
-        ),
-        home: CreateEventStep2(),
-      ),
-    );
+    return FutureBuilder(
+        future: _initialization,
+        builder: (context, snapshot) {
+          if (snapshot.hasError) {
+            print(snapshot.error);
+            return MaterialApp(
+              title: 'Conmi',
+              theme: ThemeData(
+                primaryColor: ConmiColor().primary,
+                secondaryHeaderColor: ConmiColor().secondary,
+                primarySwatch: Colors.blue,
+                visualDensity: VisualDensity.adaptivePlatformDensity,
+              ),
+              home: Text(snapshot.error.toString()),
+            );
+          }
+
+          // Once complete, show your application
+          if (snapshot.connectionState == ConnectionState.done) {
+            return MaterialApp(
+              title: 'Conmi',
+              theme: ThemeData(
+                primaryColor: ConmiColor().primary,
+                secondaryHeaderColor: ConmiColor().secondary,
+                primarySwatch: Colors.blue,
+                visualDensity: VisualDensity.adaptivePlatformDensity,
+              ),
+              home: CreateEventStep1(),
+            );
+          }
+          return MaterialApp(
+              title: 'Conmi',
+              theme: ThemeData(
+                primaryColor: ConmiColor().primary,
+                secondaryHeaderColor: ConmiColor().secondary,
+                primarySwatch: Colors.blue,
+                visualDensity: VisualDensity.adaptivePlatformDensity,
+              ),
+              home: Text("Loading"),
+            );
+        });
   }
 }

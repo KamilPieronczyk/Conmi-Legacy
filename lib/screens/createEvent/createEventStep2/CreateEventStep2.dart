@@ -20,7 +20,8 @@ class CreateEventStep2 extends StatefulWidget {
 class _CreateEventStep2State extends State<CreateEventStep2> {
   @override
   Widget build(BuildContext context) {
-    final eventName = Provider.of<CreateEventData>(context, listen: false).eventName;
+    final eventName =
+        Provider.of<CreateEventData>(context, listen: false).eventName;
     return Scaffold(
       body: MainContainer(
         Column(
@@ -38,19 +39,23 @@ class _CreateEventStep2State extends State<CreateEventStep2> {
                           padding: const EdgeInsets.fromLTRB(30, 0, 30, 0),
                           child: Hero(
                             tag: 'Image',
-                            child: Container(
-                              child: ClipRRect(
-                                child: Consumer<CreateEventData>(
-                                  builder: (context, cart, child) => Image(
-                                    image: AssetImage(cart.image.path),
-                                    height: 140,
-                                    fit: BoxFit.fitHeight,
+                            child: AspectRatio(
+                              aspectRatio: 2/1,
+                              child: Container(
+                                child: ClipRRect(
+                                  child: Consumer<CreateEventData>(
+                                    builder: (context, cart, child) => Image(
+                                      image: AssetImage(cart.image.path),
+                                      height: 140,
+                                      fit: BoxFit.cover,
+                                    ),
                                   ),
+                                  borderRadius: BorderRadius.circular(14),
                                 ),
-                                borderRadius: BorderRadius.circular(14),
+                                decoration: BoxDecoration(
+                                    borderRadius: BorderRadius.circular(14),
+                                    boxShadow: [Shadow.get()]),
                               ),
-                              decoration:
-                                  BoxDecoration(borderRadius: BorderRadius.circular(14), boxShadow: [Shadow.get()]),
                             ),
                           ),
                         ),
@@ -81,7 +86,10 @@ class _CreateEventStep2State extends State<CreateEventStep2> {
                 margin: EdgeInsets.fromLTRB(0, 40, 0, 0),
               ),
             ),
-            BottomBar(step: 2, previousScreen: CreateEventStep1(), nextScreen: CreateEventStep3()),
+            BottomBar(
+                step: 2,
+                previousScreen: CreateEventStep1(),
+                nextScreen: CreateEventStep3()),
           ],
         ),
       ),
