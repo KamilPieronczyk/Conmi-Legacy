@@ -17,10 +17,11 @@ class _ImageCarouselState extends State<ImageCarousel> {
         options: CarouselOptions(
           height: 300.0,
         ),
-        items: CarouselImageList.toMatrix().map((cartOfImages) {
-          return Builder(
-            builder: (BuildContext context) {
-              return Container(
+        items: CarouselImageList.toMatrix().map(
+          (cartOfImages) {
+            return Builder(
+              builder: (BuildContext context) {
+                return Container(
                   margin: EdgeInsets.symmetric(horizontal: 5.0),
                   child: GridView.count(
                     crossAxisCount: 2,
@@ -30,9 +31,11 @@ class _ImageCarouselState extends State<ImageCarousel> {
                               conmiImage: image,
                             ))
                         .toList(),
-                  ));
-            },
-          );
-        }).toList());
+                  ),
+                );
+              },
+            );
+          },
+        ).toList());
   }
 }

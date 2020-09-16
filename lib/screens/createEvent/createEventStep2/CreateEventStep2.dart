@@ -40,10 +40,12 @@ class _CreateEventStep2State extends State<CreateEventStep2> {
                             tag: 'Image',
                             child: Container(
                               child: ClipRRect(
-                                child: Image(
-                                  image: AssetImage('assets/images/lake.jpg'),
-                                  height: 140,
-                                  fit: BoxFit.fitHeight,
+                                child: Consumer<CreateEventData>(
+                                  builder: (context, cart, child) => Image(
+                                    image: AssetImage(cart.image.path),
+                                    height: 140,
+                                    fit: BoxFit.fitHeight,
+                                  ),
                                 ),
                                 borderRadius: BorderRadius.circular(14),
                               ),

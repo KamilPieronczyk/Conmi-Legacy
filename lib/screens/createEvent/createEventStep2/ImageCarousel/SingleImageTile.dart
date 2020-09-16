@@ -1,6 +1,8 @@
 import 'package:conmi/models/ConmiImage.dart';
+import 'package:conmi/models/CreateEventData.dart';
 import 'package:conmi/widgets/Shadow.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 
 class SingleImageTile extends StatefulWidget {
   final ConmiImage conmiImage;
@@ -13,24 +15,32 @@ class SingleImageTile extends StatefulWidget {
 class _SingleImageTileState extends State<SingleImageTile> {
   ConmiImage conmiImage;
   _SingleImageTileState(this.conmiImage);
+
+  void onTap(BuildContext context) {
+    Provider.of<CreateEventData>(context, listen: false).image = conmiImage;
+  }
+
   @override
   Widget build(BuildContext context) {
-    return Padding(
-      padding: const EdgeInsets.all(2.0),
-      child: Container(
-        child: Image(
-          image: AssetImage(conmiImage.path),
-          //height: 140,
-          //width: 110,
-          fit: BoxFit.fitHeight,
-        ),
-        decoration: BoxDecoration(
-          border: Border.all(
-            color: Colors.white,
-            width: 3,
+    return GestureDetector(
+      onTap: () => onTap(context),
+      child: Padding(
+        padding: const EdgeInsets.all(2.0),
+        child: Container(
+          child: Image(
+            image: AssetImage(conmiImage.path),
+            //height: 140,
+            //width: 110,
+            fit: BoxFit.fitHeight,
           ),
-          borderRadius: BorderRadius.circular(4),
-          boxShadow: [Shadow.get()],
+          decoration: BoxDecoration(
+            border: Border.all(
+              color: Colors.white,
+              width: 3,
+            ),
+            borderRadius: BorderRadius.circular(4),
+            boxShadow: [Shadow.get()],
+          ),
         ),
       ),
     );
