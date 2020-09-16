@@ -17,38 +17,20 @@ class _ImageCarouselState extends State<ImageCarousel> {
         options: CarouselOptions(
           height: 300.0,
         ),
-        items: [1,2,3].map((image) {
+        items: CarouselImageList.toMatrix().map((cartOfImages) {
           return Builder(
             builder: (BuildContext context) {
               return Container(
-                width: MediaQuery.of(context).size.width,
-                margin: EdgeInsets.symmetric(horizontal: 5.0),
-                child: Column(
-                  children: [
-                    Expanded(
-                      child: Row(
-                        children: [
-                          SingleImageTile(conmiImage: CarouselImageList.images[0]),
-                          SingleImageTile(conmiImage: CarouselImageList.images[1])
-                        ],
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        crossAxisAlignment: CrossAxisAlignment.stretch,
-                      ),
-                    ),
-                    Expanded(
-                      child: Row(
-                        children: [
-                          SingleImageTile(conmiImage: CarouselImageList.images[2]),
-                          SingleImageTile(conmiImage: CarouselImageList.images[3])
-                        ],
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        crossAxisAlignment: CrossAxisAlignment.stretch,
-                      ),
-                    )
-                  ],
-                ),
-                height: 150,
-              );
+                  margin: EdgeInsets.symmetric(horizontal: 5.0),
+                  child: GridView.count(
+                    crossAxisCount: 2,
+                    padding: const EdgeInsets.all(0),
+                    children: cartOfImages
+                        .map((image) => SingleImageTile(
+                              conmiImage: image,
+                            ))
+                        .toList(),
+                  ));
             },
           );
         }).toList());

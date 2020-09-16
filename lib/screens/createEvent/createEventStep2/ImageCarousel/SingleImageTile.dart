@@ -15,24 +15,22 @@ class _SingleImageTileState extends State<SingleImageTile> {
   _SingleImageTileState(this.conmiImage);
   @override
   Widget build(BuildContext context) {
-    return Expanded(
-      child: Padding(
-        padding: const EdgeInsets.all(2.0),
-        child: Container(
-          child: Image(
-            image: AssetImage(conmiImage.path),
-            //height: 140,
-            //width: 110,
-            fit: BoxFit.fitHeight,
+    return Padding(
+      padding: const EdgeInsets.all(2.0),
+      child: Container(
+        child: Image(
+          image: AssetImage(conmiImage.path),
+          //height: 140,
+          //width: 110,
+          fit: BoxFit.fitHeight,
+        ),
+        decoration: BoxDecoration(
+          border: Border.all(
+            color: Colors.white,
+            width: 3,
           ),
-          decoration: BoxDecoration(
-            border: Border.all(
-              color: Colors.white,
-              width: 3,
-            ),
-            borderRadius: BorderRadius.circular(4),
-            boxShadow: [Shadow.get()],
-          ),
+          borderRadius: BorderRadius.circular(4),
+          boxShadow: [Shadow.get()],
         ),
       ),
     );
