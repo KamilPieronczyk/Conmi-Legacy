@@ -8,18 +8,17 @@ import 'package:conmi/utils/StringsPL.dart';
 import 'package:conmi/widgets/ConmiFontStyle.dart';
 import 'package:conmi/widgets/Shadow.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_eventemitter/flutter_eventemitter.dart';
 import 'package:provider/provider.dart';
 
-class CreateEventStep1 extends StatefulWidget {
-  CreateEventStep1({Key key}) : super(key: key);
-  @override
-  _CreateEventStep1State createState() => _CreateEventStep1State();
-}
+class CreateEventStep1 extends StatelessWidget {
+  CreateEventStep1();
 
-class _CreateEventStep1State extends State<CreateEventStep1> {
-  _CreateEventStep1State();
   @override
   Widget build(BuildContext context) {
+    EventEmitter.subscribe('BottomBarNextScreenButtonClicked', (value) {
+      print(value);
+    });
     return Scaffold(
       body: MainContainer(
         Column(
@@ -27,50 +26,76 @@ class _CreateEventStep1State extends State<CreateEventStep1> {
             TopTitle(StringsPL.createEventSetEventName),
             Expanded(
               child: Center(
-                child: Container(
-                  child: Center(
-                    child: Padding(
-                      padding: const EdgeInsets.fromLTRB(20, 0, 10, 0),
-                      child: TextFormField(
-                        textAlign: TextAlign.center,
-                        style: TextStyle(
-                          fontSize: 16,
-                          fontWeight: FontWeight.bold,
-                          color: ConmiColor().blackText,
-                        ),
-                        decoration: InputDecoration(
-                          border: InputBorder.none,
-                          hintText: StringsPL.createEventTextFieldHint,
-                        ),
-                        onChanged: (value) => {Provider.of<CreateEventData>(context, listen: false).eventName = value},
-                      ),
-                    ),
-                  ),
-                  transform: Matrix4.translationValues(0, -18, 0),
-                  height: 36,
-                  width: 210,
-                  decoration: BoxDecoration(
-                    color: Colors.white,
-                    borderRadius: BorderRadius.circular(14),
-                    boxShadow: [Shadow.get()],
-                  ),
-                ),
-                // child: TextFormField(
-                //   decoration: InputDecoration(
-                //     hintText: StringsPL.createEventTextFieldHint,
-                //     focusedBorder: new UnderlineInputBorder(
-                //       borderSide: BorderSide(
-                //         color: ConmiColor().purple,
-                //         style: BorderStyle.solid,
-                //       ),
-                //     ),
-                //   ),
-                // ),
+                child: EventNameTextField(),
               ),
             ),
             BottomBar(step: 1, nextScreen: CreateEventStep2(), previousScreen: CreateEventStep1()),
           ],
         ),
+      ),
+    );
+  }
+}
+
+class EventNameTextField extends StatefulWidget {
+  const EventNameTextField({
+    Key key,
+  }) : super(key: key);
+
+  @override
+  _EventNameTextFieldState createState() => _EventNameTextFieldState();
+}
+
+class _EventNameTextFieldState extends State<EventNameTextField> {
+  bool isError = false;
+
+  void listener() {
+    EventEmitter.subscribe('BottomBarNextScreenButtonClicked', (step) {
+      if (step == 1) validate();
+    });
+  }
+
+  void validate() {
+    final eventName = Provider.of<CreateEventData>(context, listen: false).eventName;
+    setState(() {
+      isError = eventName == null || eventName.isEmpty;
+    });
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    listener();
+    return Container(
+      child: Center(
+        child: Padding(
+          padding: const EdgeInsets.fromLTRB(20, 0, 10, 0),
+          child: TextFormField(
+            textAlign: TextAlign.center,
+            style: TextStyle(
+              fontSize: 16,
+              fontWeight: FontWeight.bold,
+              color: ConmiColor().blackText,
+            ),
+            decoration: InputDecoration(
+              border: InputBorder.none,
+              hintText: StringsPL.createEventTextFieldHint,
+            ),
+            onChanged: (value) {
+              Provider.of<CreateEventData>(context, listen: false).eventName = value;
+              validate();
+            },
+          ),
+        ),
+      ),
+      height: 36,
+      width: 210,
+      decoration: BoxDecoration(
+        color: Colors.white,
+        border: Border.all(
+          color: isError ? Colors.red : Colors.white,
+        ),
+        borderRadius: BorderRadius.circular(14),
+        boxShadow: [Shadow.get()],
       ),
     );
   }

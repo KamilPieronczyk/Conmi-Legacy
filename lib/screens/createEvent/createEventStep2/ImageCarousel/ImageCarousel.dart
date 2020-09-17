@@ -16,6 +16,7 @@ class _ImageCarouselState extends State<ImageCarousel> {
     return CarouselSlider(
         options: CarouselOptions(
           height: 300.0,
+          enableInfiniteScroll: false,
         ),
         items: CarouselImageList.toMatrix().map(
           (cartOfImages) {

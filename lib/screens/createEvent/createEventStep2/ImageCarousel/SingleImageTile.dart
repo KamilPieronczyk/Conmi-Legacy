@@ -20,6 +20,10 @@ class _SingleImageTileState extends State<SingleImageTile> {
     Provider.of<CreateEventData>(context, listen: false).image = conmiImage;
   }
 
+  bool isSelected(BuildContext context) {
+    return Provider.of<CreateEventData>(context, listen: true).image.id == conmiImage.id;
+  }
+
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
@@ -35,7 +39,7 @@ class _SingleImageTileState extends State<SingleImageTile> {
           ),
           decoration: BoxDecoration(
             border: Border.all(
-              color: Colors.white,
+              color: isSelected(context) ? Colors.green : Colors.white,
               width: 3,
             ),
             borderRadius: BorderRadius.circular(4),

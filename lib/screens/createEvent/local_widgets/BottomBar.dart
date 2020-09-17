@@ -1,5 +1,8 @@
+import 'package:conmi/models/CreateEventData.dart';
 import 'package:conmi/utils/Colors.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_eventemitter/flutter_eventemitter.dart';
+import 'package:provider/provider.dart';
 import 'package:step_progress_indicator/step_progress_indicator.dart';
 import 'package:flutter/animation.dart';
 
@@ -7,15 +10,12 @@ class BottomBar extends StatefulWidget {
   int step = 0;
   Widget previousScreen;
   Widget nextScreen;
-  BottomBar({this.step = 0, this.nextScreen, this.previousScreen, Key key})
-      : super(key: key);
+  BottomBar({this.step = 0, this.nextScreen, this.previousScreen, Key key}) : super(key: key);
 
-  _BottomBarState createState() =>
-      _BottomBarState(this.step, this.nextScreen, this.previousScreen);
+  _BottomBarState createState() => _BottomBarState(this.step, this.nextScreen, this.previousScreen);
 }
 
-class _BottomBarState extends State<BottomBar>
-    with SingleTickerProviderStateMixin {
+class _BottomBarState extends State<BottomBar> with SingleTickerProviderStateMixin {
   Animation<double> animation;
   AnimationController controller;
   Widget previousScreen;
@@ -30,28 +30,21 @@ class _BottomBarState extends State<BottomBar>
       duration: const Duration(milliseconds: 300),
       vsync: this,
     );
-    final Animation curve =
-        CurvedAnimation(parent: controller, curve: Curves.easeOutQuart);
-    animation = Tween<double>(begin: (step - 1) * 90.0, end: step * 90.0)
-        .animate(curve);
+    final Animation curve = CurvedAnimation(parent: controller, curve: Curves.easeOutQuart);
+    animation = Tween<double>(begin: (step - 1) * 90.0, end: step * 90.0).animate(curve);
 
     controller.forward();
   }
 
   void navigateToNextScreen(BuildContext context) {
-    // controller.forward().then((value) => {
-    //       Navigator.push(
-    //         context,
-    //         MaterialPageRoute(
-    //           builder: (context) => nextScreen,
-    //         ),
-    //       )
-    //     });
+    EventEmitter.publish('BottomBarNextScreenButtonClicked', 1);
+    final eventName = Provider.of<CreateEventData>(context, listen: false).eventName;
+    if (eventName == null || eventName.isEmpty) return;
     Navigator.push(
       context,
       PageRouteBuilder(
         pageBuilder: (context, animation1, animation2) => nextScreen,
-    )
+      ),
     );
   }
 
@@ -67,8 +60,7 @@ class _BottomBarState extends State<BottomBar>
           Row(
             children: <Widget>[
               IconButton(
-                icon: Icon(Icons.arrow_back,
-                    color: ConmiColor().purple, size: 36.0),
+                icon: Icon(Icons.arrow_back, color: ConmiColor().purple, size: 36.0),
                 onPressed: () => this.navigateToPreviousScreen(context),
               ),
               Center(
@@ -106,8 +98,7 @@ class _BottomBarState extends State<BottomBar>
 }
 
 class StepProgressIndicatorAnimated extends AnimatedWidget {
-  StepProgressIndicatorAnimated({Key key, Animation<double> animation})
-      : super(key: key, listenable: animation);
+  StepProgressIndicatorAnimated({Key key, Animation<double> animation}) : super(key: key, listenable: animation);
 
   Widget build(BuildContext context) {
     final animation = listenable as Animation<double>;

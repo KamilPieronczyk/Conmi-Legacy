@@ -216,6 +216,13 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "6.0.5"
+  flutter_eventemitter:
+    dependency: "direct main"
+    description:
+      name: flutter_eventemitter
+      url: "https://pub.dartlang.org"
+    source: hosted
+    version: "0.1.1"
   flutter_redux:
     dependency: "direct main"
     description:

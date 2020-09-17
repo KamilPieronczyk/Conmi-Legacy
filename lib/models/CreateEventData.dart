@@ -4,7 +4,7 @@ import 'package:flutter/cupertino.dart';
 
 class CreateEventData extends ChangeNotifier {
   String id;
-  String _eventName;
+  String _eventName = "";
   ConmiImage _image = CarouselImageList.images[0];
 
   String get eventName {
