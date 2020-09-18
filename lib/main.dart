@@ -2,6 +2,7 @@ import 'package:conmi/screens/createEvent/bloc/CreateEventBloc.dart';
 import 'package:conmi/screens/createEvent/createEventStep2/CreateEventStep2.dart';
 import 'package:conmi/screens/createEvent/createEventStep1/CreateEventStep1.dart';
 import 'package:conmi/screens/createEvent/createEventStep3/CreateEventStep3.dart';
+import 'package:conmi/screens/home/Home.dart';
 import 'package:conmi/utils/Colors.dart';
 import 'package:firebase_analytics/firebase_analytics.dart';
 import 'package:flutter/material.dart';
@@ -9,6 +10,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:provider/provider.dart';
 import 'models/CreateEventData.dart';
 import 'package:firebase_core/firebase_core.dart';
+import 'package:flutter_statusbarcolor/flutter_statusbarcolor.dart';
 
 void main() {
   WidgetsFlutterBinding.ensureInitialized();
@@ -28,6 +30,7 @@ class MyApp extends StatelessWidget {
 // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
+    FlutterStatusbarcolor.setStatusBarColor(ConmiColor().primary);
     return FutureBuilder(
         future: _initialization,
         builder: (context, snapshot) {
@@ -55,7 +58,7 @@ class MyApp extends StatelessWidget {
                 primarySwatch: Colors.blue,
                 visualDensity: VisualDensity.adaptivePlatformDensity,
               ),
-              home: CreateEventStep1(),
+              home: Home(),
             );
           }
           return MaterialApp(
