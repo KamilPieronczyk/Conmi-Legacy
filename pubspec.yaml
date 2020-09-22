@@ -83,8 +83,11 @@ flutter:
 
     #layout
     - assets/images/TopBarWave.svg
-    - assets/images/Pioneers.svg
 
+  fonts:
+    - family: Pacifico
+      fonts:
+        - asset: fonts/Pacifico-Regular.ttf
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/assets-and-images/#resolution-aware.
 

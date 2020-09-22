@@ -62,15 +62,15 @@ class MyApp extends StatelessWidget {
             );
           }
           return MaterialApp(
-              title: 'Conmi',
-              theme: ThemeData(
-                primaryColor: ConmiColor().primary,
-                secondaryHeaderColor: ConmiColor().secondary,
-                primarySwatch: Colors.blue,
-                visualDensity: VisualDensity.adaptivePlatformDensity,
-              ),
-              home: Text("Loading"),
-            );
+            title: 'Conmi',
+            theme: ThemeData(
+              primaryColor: ConmiColor().primary,
+              secondaryHeaderColor: ConmiColor().secondary,
+              primarySwatch: Colors.blue,
+              visualDensity: VisualDensity.adaptivePlatformDensity,
+            ),
+            home: Text("Loading"),
+          );
         });
   }
 }
