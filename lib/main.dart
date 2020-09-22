@@ -1,8 +1,9 @@
+import 'package:conmi/screens/authWrapper/AuthWrapper.dart';
 import 'package:conmi/screens/createEvent/bloc/CreateEventBloc.dart';
 import 'package:conmi/screens/createEvent/createEventStep2/CreateEventStep2.dart';
 import 'package:conmi/screens/createEvent/createEventStep1/CreateEventStep1.dart';
 import 'package:conmi/screens/createEvent/createEventStep3/CreateEventStep3.dart';
-import 'package:conmi/screens/home/Home.dart';
+import 'package:conmi/widgets/BottomTabBarLayout.dart';
 import 'package:conmi/utils/Colors.dart';
 import 'package:firebase_analytics/firebase_analytics.dart';
 import 'package:flutter/material.dart';
@@ -58,7 +59,7 @@ class MyApp extends StatelessWidget {
                 primarySwatch: Colors.blue,
                 visualDensity: VisualDensity.adaptivePlatformDensity,
               ),
-              home: Home(),
+              home: AuthWrapper(),
             );
           }
           return MaterialApp(
