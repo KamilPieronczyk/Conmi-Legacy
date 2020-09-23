@@ -1,3 +1,4 @@
+import 'package:conmi/widgets/TopBarWave.dart';
 import 'package:flutter/material.dart';
 
 class Home extends StatelessWidget {
@@ -5,8 +6,15 @@ class Home extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      child: Text("Home"),
+    return SafeArea(
+      child: Column(
+        children: [
+          TopBarWave(),
+          Container(
+            child: Text("Home"),
+          ),
+        ],
+      ),
     );
   }
 }

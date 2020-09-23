@@ -1,3 +1,5 @@
+import 'package:conmi/screens/eventsList/EventsList.dart';
+import 'package:conmi/screens/home/Home.dart';
 import 'package:conmi/widgets/BottomTabBarLayout.dart';
 import 'package:flutter/material.dart';
 
@@ -16,6 +18,7 @@ class AuthWrapper extends StatelessWidget {
       iconList: iconList,
       floatingActionButtonIcon: Icons.add,
       floatingActionButtonOnPressed: () => print("floatingActionButtonOnPressed"),
+      screenList: [Home(), EventsList()],
     );
   }
 }

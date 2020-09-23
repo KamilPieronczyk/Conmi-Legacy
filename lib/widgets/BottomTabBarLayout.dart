@@ -88,10 +88,9 @@ class _BottomTabBarLayoutState extends State<BottomTabBarLayout> with SingleTick
         notchSmoothness: NotchSmoothness.defaultEdge,
         onTap: (index) => setState(() => activeIndex = index),
       ),
-      body: SafeArea(
-        child: Container(
-          child: TopBarWave(),
-        ),
+      body: IndexedStack(
+        index: activeIndex,
+        children: widget.screenList,
       ),
     );
   }
