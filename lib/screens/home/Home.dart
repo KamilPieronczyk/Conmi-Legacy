@@ -21,9 +21,7 @@ class Home extends StatelessWidget {
           ),
           Expanded(
             flex: 250,
-            child: Container(
-              child: ConmiFontStyle.robotoBold16('Notifucation Area'),
-            ),
+            child: NotificationArea(),
           )
         ],
         crossAxisAlignment: CrossAxisAlignment.start,
@@ -32,23 +30,24 @@ class Home extends StatelessWidget {
   }
 }
 
-class EventsCarousel extends StatefulWidget {
-  const EventsCarousel({
+class NotificationArea extends StatelessWidget {
+  const NotificationArea({
     Key key,
   }) : super(key: key);
 
   @override
-  _EventsCarouselState createState() => _EventsCarouselState();
+  Widget build(BuildContext context) {
+    return Container(
+      padding: EdgeInsets.symmetric(horizontal: 18),
+      child: ConmiFontStyle.robotoBold16('Notifucation Area'),
+    );
+  }
 }
 
-class _EventsCarouselState extends State<EventsCarousel> with SingleTickerProviderStateMixin {
-  AnimationController controller;
-
-  @override
-  void initState() {
-    super.initState();
-    controller = AnimationController(vsync: this, duration: Duration(milliseconds: 300));
-  }
+class EventsCarousel extends StatelessWidget {
+  const EventsCarousel({
+    Key key,
+  }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -57,24 +56,11 @@ class _EventsCarouselState extends State<EventsCarousel> with SingleTickerProvid
       child: Column(
         children: [
           ConmiFontStyle.robotoBold16("Najbliższe wydarzenia"),
-          Stack(
-            children: [
-              buildEventCard(context),
-              GestureDetector(
-                onTap: () => print("object"),
-                child: AnimatedBuilder(
-                  animation: controller,
-                  child: buildEventCard(context),
-                  builder: (context, child) => Transform(
-                    alignment: Alignment.centerRight,
-                    transform: new Matrix4.identity()
-                      ..scale(0.8 + (0.2 * controller.value.toDouble()))
-                      ..translate((MediaQuery.of(context).size.width - 90) * (1 - controller.value.toDouble())),
-                    child: child,
-                  ),
-                ),
-              ),
-            ],
+          Expanded(
+            child: ListView(
+              scrollDirection: Axis.horizontal,
+              children: List.generate(3, (index) => buildEventCard(context)).toList(),
+            ),
           )
         ],
         crossAxisAlignment: CrossAxisAlignment.start,
@@ -84,11 +70,11 @@ class _EventsCarouselState extends State<EventsCarousel> with SingleTickerProvid
 
   Widget buildEventCard(BuildContext context) {
     return Padding(
-      padding: EdgeInsets.only(top: 18, bottom: 18),
+      padding: EdgeInsets.only(top: 18, bottom: 18, right: 18),
       child: Stack(
         children: [
           Container(
-            height: MediaQuery.of(context).size.height * 0.32,
+            height: 260,
             child: AspectRatio(
               aspectRatio: 10 / 9,
               child: RoundedImage(
@@ -100,7 +86,7 @@ class _EventsCarouselState extends State<EventsCarousel> with SingleTickerProvid
             child: Align(
               alignment: Alignment.bottomCenter,
               child: Transform.translate(
-                offset: Offset(0, 33),
+                offset: Offset(0, 0),
                 child: RoundedWhiteContainer(
                   child: Padding(
                     padding: const EdgeInsets.fromLTRB(30, 8, 30, 12),
