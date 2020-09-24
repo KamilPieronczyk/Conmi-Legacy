@@ -1,3 +1,5 @@
+import 'package:conmi/screens/eventsList/SingleEventTile.dart';
+import 'package:conmi/widgets/Shadow.dart';
 import 'package:flutter/material.dart';
 
 class EventsList extends StatelessWidget {
@@ -6,8 +8,11 @@ class EventsList extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return SafeArea(
-      child: Container(
-        child: Text("EventsList"),
+      child: Column(
+        children: [
+          Text("EventsList"),
+          SingleEventTile()
+        ],
       ),
     );
   }
