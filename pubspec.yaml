@@ -82,6 +82,14 @@ flutter:
     - assets/images/party2.jpg
     - assets/images/camping1.jpg
 
+    #faces
+    - assets/images/face1.jpg
+    - assets/images/face2.jpg
+    - assets/images/face3.jpg
+    - assets/images/face4.jpg
+    - assets/images/face5.jpg
+    - assets/images/face6.jpg
+  
     #layout
     - assets/images/TopBarWave.svg
 
