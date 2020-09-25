@@ -5,6 +5,7 @@ import 'package:conmi/widgets/RoundedWhiteContainer.dart';
 import 'package:conmi/widgets/Shadow.dart';
 import 'package:conmi/widgets/TopBarWave.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/rendering.dart';
 
 class Home extends StatelessWidget {
   const Home({Key key}) : super(key: key);
@@ -12,19 +13,24 @@ class Home extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return SafeArea(
-      child: Column(
+      child: Stack(
         children: [
-          TopBarWave(),
-          Expanded(
-            flex: 350,
-            child: EventsCarousel(),
+          Column(
+            children: [
+              TopBarWave(),
+              Expanded(
+                flex: 350,
+                child: EventsCarousel(),
+              ),
+              Expanded(
+                flex: 250,
+                child: Container(),
+              )
+            ],
+            crossAxisAlignment: CrossAxisAlignment.start,
           ),
-          Expanded(
-            flex: 250,
-            child: NotificationArea(),
-          )
+          NotificationArea(),
         ],
-        crossAxisAlignment: CrossAxisAlignment.start,
       ),
     );
   }
@@ -37,9 +43,100 @@ class NotificationArea extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      padding: EdgeInsets.symmetric(horizontal: 18),
-      child: ConmiFontStyle.robotoBold16('Notifucation Area'),
+    return DraggableScrollableSheet(
+      initialChildSize: 0.37,
+      minChildSize: 0.37,
+      maxChildSize: 0.88,
+      builder: (context, scrollController) => Container(
+        color: ConmiColor().graywhite,
+        child: Column(
+          children: [
+            Padding(
+              padding: const EdgeInsets.fromLTRB(18.0, 10, 18, 18),
+              child: ConmiFontStyle.robotoBold16('Notifications'),
+            ),
+            Expanded(
+              child: ListView.builder(
+                controller: scrollController,
+                itemCount: 10,
+                itemBuilder: (context, index) => buildNotificationItem(),
+              ),
+            ),
+          ],
+          crossAxisAlignment: CrossAxisAlignment.start,
+        ),
+      ),
+    );
+  }
+
+  Widget buildNotificationItem() {
+    return Padding(
+      padding: const EdgeInsets.fromLTRB(18, 0, 18, 10),
+      child: RoundedWhiteContainer(
+        child: Padding(
+          padding: const EdgeInsets.all(14.0),
+          child: Row(
+            children: [
+              Container(
+                decoration: BoxDecoration(
+                  shape: BoxShape.circle,
+                  boxShadow: [Shadow.get()],
+                ),
+                child: CircleAvatar(
+                  backgroundColor: ConmiColor().primary,
+                ),
+              ),
+              Expanded(
+                child: Padding(
+                  padding: const EdgeInsets.symmetric(horizontal: 8),
+                  child: Column(
+                    children: [
+                      RichText(
+                        text: TextSpan(
+                          style: TextStyle(color: Colors.black87, fontSize: 16),
+                          children: [
+                            TextSpan(
+                              text: "Denise Ortiz ",
+                              style: TextStyle(color: Colors.black87, fontSize: 16, fontWeight: FontWeight.bold),
+                            ),
+                            TextSpan(text: "dodał ankietę"),
+                          ],
+                        ),
+                      ),
+                      Padding(
+                        padding: const EdgeInsets.only(top: 2),
+                        child: ConmiFontStyle.robotoRegular12("17 sie o 21:37"),
+                      ),
+                    ],
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                  ),
+                ),
+              ),
+              buildPopUpMenuButton(),
+            ],
+            crossAxisAlignment: CrossAxisAlignment.center,
+          ),
+        ),
+      ),
+    );
+  }
+
+  Widget buildPopUpMenuButton() {
+    return PopupMenuButton(
+      icon: Icon(Icons.more_vert),
+      itemBuilder: (context) => [
+        PopupMenuItem(
+          child: Row(
+            children: [
+              Padding(
+                padding: const EdgeInsets.fromLTRB(2, 2, 8, 2),
+                child: Icon(Icons.remove),
+              ),
+              Text('Usuń')
+            ],
+          ),
+        ),
+      ],
     );
   }
 }
