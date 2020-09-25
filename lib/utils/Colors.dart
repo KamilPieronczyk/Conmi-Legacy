@@ -10,6 +10,7 @@ class ConmiColor {
   final _pink = '#F591F2';
   final _pinkDark = '#C272BF';
   final _pinkLight = '#DB81D8';
+  final _graywhite = '#FAFAFA';
 
   Color get primary => fromHex(_primary);
   Color get primaryDark => fromHex(_primaryDark);
@@ -21,6 +22,7 @@ class ConmiColor {
   Color get gradientPinkDark => fromHex(_pinkDark);
   Color get gradientPinkLight => fromHex(_pinkLight);
   Color get blackText => Color.fromRGBO(0, 0, 0, 0.87);
+  Color get graywhite => fromHex(_graywhite);
 
   static fromHex(String hexString) {
     final buffer = StringBuffer();
