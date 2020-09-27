@@ -91,7 +91,7 @@ flutter:
     - assets/images/face6.jpg
   
     #layout
-    - assets/images/TopBarWave.svg
+    - assets/images/OvalBackground.svg
 
   fonts:
     - family: Pacifico

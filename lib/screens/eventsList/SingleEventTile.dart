@@ -23,9 +23,7 @@ class SingleEventTile extends StatelessWidget {
                 ),
                 borderRadius: BorderRadius.circular(14),
               ),
-              decoration: BoxDecoration(
-                  borderRadius: BorderRadius.circular(14),
-                  boxShadow: [Shadow.get()]),
+              decoration: BoxDecoration(borderRadius: BorderRadius.circular(14), boxShadow: [Shadow.get()]),
             ),
           ),
           Positioned.fill(
@@ -58,7 +56,7 @@ class SingleEventTile extends StatelessWidget {
                       mainAxisSize: MainAxisSize.min,
                     ),
                   ),
-                 // opacity: 0.85,
+                  // opacity: 0.85,
                 ),
               ),
               alignment: Alignment.topLeft,
@@ -74,28 +72,22 @@ class SingleEventTile extends StatelessWidget {
                     child: Column(
                       children: [
                         CircleAvatar(
-                          backgroundImage:
-                              AssetImage('assets/images/face5.jpg'),
+                          backgroundImage: AssetImage('assets/images/face5.jpg'),
                         ),
                         SizedBox(height: 2),
                         CircleAvatar(
-                          backgroundImage:
-                              AssetImage('assets/images/face4.jpg'),
+                          backgroundImage: AssetImage('assets/images/face4.jpg'),
                         ),
                         SizedBox(height: 2),
                         CircleAvatar(
-                          backgroundImage:
-                              AssetImage('assets/images/face3.jpg'),
+                          backgroundImage: AssetImage('assets/images/face3.jpg'),
                         ),
                         SizedBox(height: 2),
                         Container(
                             child: Align(
                               child: Text(
                                 '+5',
-                                style: TextStyle(
-                                  color: ConmiColor().blackText,
-                                  fontWeight: FontWeight.w500
-                                ),
+                                style: TextStyle(color: ConmiColor().blackText, fontWeight: FontWeight.w500),
                               ),
                               alignment: AlignmentDirectional.center,
                             ),
@@ -111,7 +103,7 @@ class SingleEventTile extends StatelessWidget {
                       mainAxisSize: MainAxisSize.min,
                     ),
                   ),
-                 // opacity: 0.85,
+                  // opacity: 0.85,
                 ),
               ),
               alignment: Alignment.centerRight,

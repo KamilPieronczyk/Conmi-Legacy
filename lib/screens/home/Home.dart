@@ -1,3 +1,4 @@
+import 'package:conmi/screens/eventWrapper/EventWrapper.dart';
 import 'package:conmi/screens/home/local_widgets/RoundedImage.dart';
 import 'package:conmi/utils/Colors.dart';
 import 'package:conmi/widgets/ConmiFontStyle.dart';
@@ -165,75 +166,87 @@ class EventsCarousel extends StatelessWidget {
     );
   }
 
+  void _openEventPage(context) {
+    Navigator.pushReplacement(
+      context,
+      PageRouteBuilder(
+        pageBuilder: (context, animation1, animation2) => EventWrapper(),
+      ),
+    );
+  }
+
   Widget buildEventCard(BuildContext context) {
-    return Padding(
-      padding: EdgeInsets.only(top: 18, bottom: 18, right: 18),
-      child: Stack(
-        children: [
-          Container(
-            height: 260,
-            child: AspectRatio(
-              aspectRatio: 10 / 9,
-              child: RoundedImage(
-                imagePath: "assets/images/bonfire.jpg",
+    return GestureDetector(
+      onTap: () => _openEventPage(context),
+      child: Padding(
+        padding: EdgeInsets.only(top: 18, bottom: 18, right: 18),
+        child: Stack(
+          children: [
+            Container(
+              height: 260,
+              child: AspectRatio(
+                aspectRatio: 10 / 9,
+                child: RoundedImage(
+                  imagePath: "assets/images/bonfire.jpg",
+                ),
               ),
             ),
-          ),
-          Positioned.fill(
-            child: Align(
-              alignment: Alignment.bottomCenter,
-              child: Transform.translate(
-                offset: Offset(0, 0),
-                child: RoundedWhiteContainer(
-                  child: Padding(
-                    padding: const EdgeInsets.fromLTRB(30, 8, 30, 12),
-                    child: Column(
-                      children: [
-                        Padding(
-                          padding: const EdgeInsets.only(bottom: 10),
-                          child: ConmiFontStyle.robotoBold16("Wyjazd"),
-                        ),
-                        ConmiFontStyle.robotoMedium16("Katowice, Sasanek"),
-                      ],
-                      mainAxisSize: MainAxisSize.min,
+            Positioned.fill(
+              child: Align(
+                alignment: Alignment.bottomCenter,
+                child: Transform.translate(
+                  offset: Offset(0, 0),
+                  child: RoundedWhiteContainer(
+                    child: Padding(
+                      padding: const EdgeInsets.fromLTRB(30, 8, 30, 12),
+                      child: Column(
+                        children: [
+                          Padding(
+                            padding: const EdgeInsets.only(bottom: 10),
+                            child: ConmiFontStyle.robotoBold16("Wyjazd"),
+                          ),
+                          ConmiFontStyle.robotoMedium16("Katowice, Sasanek"),
+                        ],
+                        mainAxisSize: MainAxisSize.min,
+                      ),
                     ),
                   ),
                 ),
               ),
             ),
-          ),
-          Positioned.fill(
-            child: Align(
-              alignment: Alignment.topRight,
-              child: Padding(
-                padding: const EdgeInsets.all(10),
-                child: RoundedWhiteContainer(
-                  child: Padding(
-                    padding: EdgeInsets.fromLTRB(10, 8, 10, 8),
-                    child: Column(
-                      children: [
-                        Padding(
-                          padding: const EdgeInsets.only(bottom: 2),
-                          child: Text(
-                            "Sep",
-                            style: TextStyle(
-                              fontSize: 13,
-                              fontWeight: FontWeight.w500,
-                              color: ConmiColor().purple,
+            Positioned.fill(
+              child: Align(
+                alignment: Alignment.topRight,
+                child: Padding(
+                  padding: const EdgeInsets.all(10),
+                  child: RoundedWhiteContainer(
+                    child: Padding(
+                      padding: EdgeInsets.fromLTRB(10, 8, 10, 8),
+                      child: Column(
+                        children: [
+                          Padding(
+                            padding: const EdgeInsets.only(bottom: 2),
+                            child: Text(
+                              "Sep",
+                              style: TextStyle(
+                                fontSize: 13,
+                                fontWeight: FontWeight.w500,
+                                color: ConmiColor().purple,
+                              ),
                             ),
                           ),
-                        ),
-                        ConmiFontStyle.robotoBold20("19", color: ConmiColor().purple),
-                      ],
-                      mainAxisSize: MainAxisSize.min,
+                          ConmiFontStyle.robotoBold20("19", color: ConmiColor().purple),
+                        ],
+                        mainAxisSize: MainAxisSize.min,
+                      ),
                     ),
                   ),
                 ),
               ),
             ),
-          ),
-          buildEventCardParticipantsList()
-        ],
+            buildEventCardParticipantsList()
+          ],
+        ),
       ),
     );
   }
