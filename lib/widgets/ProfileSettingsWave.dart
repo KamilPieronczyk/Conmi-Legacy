@@ -13,16 +13,105 @@ class ProfileSettingsWave extends StatelessWidget {
         //height: 72,
         child: Column(
           children: [
+            Stack(
+              children: [
+                Container(
+                  width: double.infinity,
+                  height: MediaQuery.of(context).size.width,
+                  //color: ConmiColor().gradientPink,
+                  child: CustomPaint(
+                    painter: CurvePainter(),
+                  ),
+                ),
+                Container(
+                  child: Padding(
+                    padding: const EdgeInsets.fromLTRB(15, 15, 0, 0),
+                    child: Icon(
+                      Icons.arrow_back,
+                    ),
+                  ),
+                ),
+                Center(
+                  child: Padding(
+                    padding: const EdgeInsets.only(top: 120),
+                    child: Column(
+                      children: [
+                        Container(
+                          width: 120,
+                          height: 120,
+                          decoration: BoxDecoration(
+                            color: ConmiColor().primary,
+                            shape: BoxShape.circle,
+                          ),
+                        ),
+                        Padding(
+                          padding: const EdgeInsets.only(top: 10),
+                          child: Container(
+                            child: Text("Imie Nazwisko",
+                                style: TextStyle(fontFamily: 'Roboto', fontSize: 16, color: Colors.black)),
+                          ),
+                        ),
+                        Padding(
+                          padding: const EdgeInsets.only(top: 5),
+                          child: Container(
+                            child: Text("Adres",
+                                style: TextStyle(fontFamily: 'Roboto', fontSize: 16, color: Colors.black87)),
+                          ),
+                        ),
+                      ],
+                    ),
+                  ),
+                ),
+              ],
+            ),
             Container(
               width: double.infinity,
-              height: MediaQuery.of(context).size.width,
-              //color: ConmiColor().gradientPink,
-              child: CustomPaint(
-                painter: CurvePainter(),
+              padding: EdgeInsets.only(top: 25),
+              child: Column(
+                children: [
+                  buildRow(icon: Icons.person_outline, text: "Profil ", onPressed: () => {}),
+                  buildRow(icon: Icons.notifications_none, text: "Powiadomienia ", onPressed: () => {}),
+                  buildRow(icon: Icons.location_on, text: "Lokalizacja ", onPressed: () => {}),
+                  buildRow(icon: Icons.settings, text: "Ustawienia ", onPressed: () => {}),
+                ],
+              ),
+            ),
+            Expanded(child: Container()),
+            Container(
+              child: Container(
+                alignment: Alignment.bottomCenter,
+                decoration: BoxDecoration(
+                  border: Border(top: BorderSide(width: 1, color: Colors.black26)),
+                ),
+                child: Padding(
+                  padding: const EdgeInsets.fromLTRB(0, 15, 0, 15),
+                  child: Text(
+                    "Wyloguj się ",
+                    style: TextStyle(fontSize: 12, color: Colors.black54),
+                  ),
+                ),
               ),
             ),
           ],
         ),
+      ),
+    );
+  }
+
+  Widget buildRow({IconData icon, String text, void Function() onPressed}) {
+    return GestureDetector(
+      onTap: onPressed,
+      child: Row(
+        children: <Widget>[
+          Padding(
+            padding: const EdgeInsets.fromLTRB(40, 18, 30, 18),
+            child: Icon(
+              icon,
+              size: 24,
+            ),
+          ),
+          Text(text, style: TextStyle(fontFamily: 'Roboto', fontSize: 16, color: Colors.black)),
+        ],
       ),
     );
   }
