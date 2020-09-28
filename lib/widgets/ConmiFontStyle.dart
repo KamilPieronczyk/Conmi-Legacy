@@ -46,6 +46,17 @@ class ConmiFontStyle {
     );
   }
 
+  static Text robotoMedium14(String text) {
+    return Text(
+      text,
+      style: TextStyle(
+        fontSize: 14,
+        fontWeight: FontWeight.w500,
+        color: Colors.black87,
+      ),
+    );
+  }
+
   static Text robotoBold20(String text, {Color color: Colors.black87}) {
     return Text(
       text,

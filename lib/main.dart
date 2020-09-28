@@ -1,4 +1,5 @@
 import 'package:conmi/screens/authWrapper/AuthWrapper.dart';
+import 'package:conmi/screens/budget/main/BudgetMain.dart';
 import 'package:conmi/screens/createEvent/bloc/CreateEventBloc.dart';
 import 'package:conmi/screens/createEvent/createEventStep2/CreateEventStep2.dart';
 import 'package:conmi/screens/createEvent/createEventStep1/CreateEventStep1.dart';
@@ -59,7 +60,7 @@ class MyApp extends StatelessWidget {
                 primarySwatch: Colors.blue,
                 visualDensity: VisualDensity.adaptivePlatformDensity,
               ),
-              home: AuthWrapper(),
+              home: BudgetMain(),
             );
           }
           return MaterialApp(
