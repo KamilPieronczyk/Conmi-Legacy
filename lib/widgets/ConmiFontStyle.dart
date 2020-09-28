@@ -56,4 +56,15 @@ class ConmiFontStyle {
       ),
     );
   }
+
+  static Text appBarText(String text, {Color color: Colors.white}) {
+    return Text(
+      text,
+      style: TextStyle(
+        fontSize: 18,
+        fontWeight: FontWeight.w500,
+        color: color,
+      ),
+    );
+  }
 }
