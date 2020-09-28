@@ -18,7 +18,6 @@ class CreateEventPlace extends StatelessWidget {
         onPressedBack: () => {},
       ),
       body: CreateEventPlaceBody(),
-      resizeToAvoidBottomPadding: false,
     );
   }
 }
@@ -121,11 +120,62 @@ class _CreateEventPlaceBodyState extends State<CreateEventPlaceBody> {
               ),
               Expanded(
                 flex: 4,
-                child: Text("ELo"),
+                child: Container(
+                  width: double.infinity,
+                  height: MediaQuery.of(context).size.height / 2,
+                  padding: EdgeInsets.symmetric(horizontal: 40),
+                  child: GridView.count(
+                    crossAxisCount: 4,
+                    crossAxisSpacing: 15,
+                    children: [
+                      buildGradientButton(),
+                      buildGradientButton(),
+                      buildGradientButton(),
+                      buildGradientButton(),
+                      buildIconButton(icon: Icons.account_balance_wallet),
+                      buildIconButton(icon: Icons.account_balance_wallet),
+                      buildIconButton(icon: Icons.account_balance_wallet),
+                      buildIconButton(icon: Icons.account_balance_wallet),
+                      buildIconButton(icon: Icons.account_balance_wallet),
+                      buildIconButton(icon: Icons.account_balance_wallet),
+                      buildIconButton(icon: Icons.account_balance_wallet),
+                      buildIconButton(icon: Icons.account_balance_wallet),
+                    ],
+                  ),
+                ),
               ),
             ],
           ),
         ),
+      ),
+    );
+  }
+
+  Widget buildGradientButton() {
+    return Container(
+      height: 60,
+      width: 60,
+      child: null,
+      decoration: BoxDecoration(
+        gradient: LinearGradient(
+          colors: [ConmiColor().primary, ConmiColor().secondary],
+          begin: Alignment.bottomLeft,
+          end: Alignment.topRight,
+        ),
+        borderRadius: BorderRadius.circular(15.0),
+      ),
+    );
+  }
+
+  Widget buildIconButton({IconData icon}) {
+    return Container(
+      height: 60,
+      width: 60,
+      alignment: Alignment.center,
+      child: Icon(
+        icon,
+        size: 35.0,
+        color: Colors.black,
       ),
     );
   }
