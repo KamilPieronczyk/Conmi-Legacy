@@ -16,7 +16,7 @@ class CreateEventPlace extends StatelessWidget {
     return Scaffold(
       appBar: RectGradientTopBar(
         title: "Dodaj miejsce",
-        onPressedBack: () => {},
+        onPressedBack: () => goBack(),
       ),
       body: CreateEventPlaceBody(),
     );
@@ -35,6 +35,16 @@ class CreateEventPlaceBody extends StatefulWidget {
 class _CreateEventPlaceBodyState extends State<CreateEventPlaceBody> {
   String gradient = 'primary';
   String icon = 'beach_access';
+  String eventName = "Event Place";
+  bool _showErrorLabel = false;
+
+  TextEditingController controller;
+
+  @override
+  void initState() {
+    super.initState();
+    controller = TextEditingController(text: eventName);
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -77,37 +87,29 @@ class _CreateEventPlaceBodyState extends State<CreateEventPlaceBody> {
                         ),
                       ),
                     ),
-                    Container(
-                      width: 160,
-                      padding: EdgeInsets.only(bottom: 30),
-                      child: TextField(
-                        textAlign: TextAlign.center,
-                        decoration: InputDecoration(
-                          hintText: "Nazwa",
-                          hintStyle: TextStyle(
-                            color: Colors.white70,
+                    GestureDetector(
+                      onTap: _showNameDialog,
+                      child: Container(
+                        padding: EdgeInsets.fromLTRB(20, 20, 20, 10),
+                        alignment: Alignment.center,
+                        child: Text(
+                          eventName.toUpperCase(),
+                          style: TextStyle(
+                            color: Colors.white,
                             fontSize: 20,
                             fontWeight: FontWeight.w500,
                           ),
-                          enabledBorder: UnderlineInputBorder(
-                            borderSide: BorderSide(color: Colors.white38),
-                          ),
-                          focusedBorder: UnderlineInputBorder(
-                            borderSide: BorderSide(color: Colors.white38),
-                          ),
-                          border: UnderlineInputBorder(
-                            borderSide: BorderSide(color: Colors.white38),
+                        ),
+                        decoration: BoxDecoration(
+                          border: Border(
+                            bottom: BorderSide(color: Colors.white30, width: 3),
                           ),
                         ),
-                        style: TextStyle(
-                          color: Colors.white,
-                          fontSize: 20,
-                          fontWeight: FontWeight.w500,
-                        ),
-                        textCapitalization: TextCapitalization.characters,
                       ),
-                    )
+                    ),
+                    SizedBox(height: 30),
                   ],
+                  mainAxisSize: MainAxisSize.min,
                 ),
               ),
             ),
@@ -196,6 +198,52 @@ class _CreateEventPlaceBodyState extends State<CreateEventPlaceBody> {
           color: entry.key == icon ? ConmiColor().primary : Colors.black87,
         ),
       ),
+    );
+  }
+
+  bool isNameValid(String name) {
+    if (name == null) return false;
+    if (name.length <= 0) return false;
+    return true;
+  }
+
+  Future<void> _showNameDialog() async {
+    return showDialog<void>(
+      context: context,
+      barrierDismissible: false, // user must tap button!
+      builder: (BuildContext context) {
+        return AlertDialog(
+          title: Text('Podaj nazwę wydarzenia'),
+          content: SingleChildScrollView(
+            child: ListBody(
+              children: <Widget>[
+                TextField(
+                  controller: controller,
+                  decoration: InputDecoration(
+                    hintText: 'Enter an event\'s name',
+                    errorText: _showErrorLabel ? "Nazwa nie może być pusta" : null,
+                  ),
+                  onChanged: (value) => setState(() {
+                    this.eventName = value;
+                    if (isNameValid(value))
+                      _showErrorLabel = false;
+                    else
+                      _showErrorLabel = true;
+                  }),
+                ),
+              ],
+            ),
+          ),
+          actions: <Widget>[
+            FlatButton(
+              child: Text('OK'),
+              onPressed: () {
+                if (isNameValid(eventName)) Navigator.pop(context);
+              },
+            ),
+          ],
+        );
+      },
     );
   }
 }
