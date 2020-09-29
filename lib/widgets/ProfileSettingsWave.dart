@@ -15,6 +15,7 @@ class ProfileSettingsWave extends StatelessWidget {
           children: [
             Stack(
               children: [
+                Positioned.fill(child: Container(color: Colors.pink)),
                 Container(
                   width: double.infinity,
                   height: MediaQuery.of(context).size.width,
@@ -131,7 +132,7 @@ class CurvePainter extends CustomPainter {
     ovalPaint.style = PaintingStyle.fill;
     ovalPaint.shader = LinearGradient(colors: [ConmiColor().secondary, ConmiColor().primary])
         .createShader(Rect.fromPoints(Offset(0, 0), Offset(size.width * (30 / 45), size.height * (8 / 9))));
-    whitepaint.color = Colors.white;
+    whitepaint.color = Colors.pink;
     paint1.shader = LinearGradient(colors: [ConmiColor().secondary, ConmiColor().primary])
         .createShader(Rect.fromPoints(Offset(0, 0), Offset(size.width, size.height)));
     paint2.shader = LinearGradient(colors: [ConmiColor().primary, ConmiColor().secondary])
@@ -146,23 +147,27 @@ class CurvePainter extends CustomPainter {
     path1.lineTo(0, size.height * (14 / 15));
     path1.quadraticBezierTo(p1x, p1y, p2x, p2y);
     path1.lineTo(size.width, size.height * (2 / 3));
+    path1.quadraticBezierTo(size.width * 0.5, size.height * 1.08, 0, size.height * (2 / 3));
     path1.lineTo(0.0, size.height * (2 / 3));
 
     final p3x = size.width * 0.5;
     final p3y = size.height;
     var path2 = Path();
-    path2.lineTo(0, size.height * (10 / 15));
-    path2.quadraticBezierTo(p3x, p3y, p2x, size.height * (43 / 45));
-    path2.lineTo(size.width, size.height * (2 / 3));
+    path2.moveTo(size.width, size.height * (12 / 15));
+    path2.lineTo(size.width, size.height);
+    path2.quadraticBezierTo(size.width * 0.75, size.height * 1, size.width * 0.5, size.height * 0.9);
+    path2.lineTo(size.width, size.height * (12 / 15));
+
     path2.lineTo(0.0, size.height * (2 / 3));
 
-    final p4x = size.width * 0.5;
-    final p4y = size.height * 1.1;
     var path3 = Path();
-    path3.lineTo(0, size.height * (32 / 45));
-    path3.quadraticBezierTo(p4x, p4y, p2x * 0.8, size.height * (30 / 45));
-    path3.lineTo(size.width, size.height * (2 / 3));
-    path3.lineTo(0.0, size.height * (2 / 3));
+    path3.lineTo(0, size.height * (30 / 45));
+    // path3.quadraticBezierTo(size.width * 0.5, size.height * 1, p2x * 0.5, size.height * (37.5 / 45));
+    // path3.quadraticBezierTo(size.width * 0.25, size.height * 0.85, 0, size.height * (33 / 45));
+    path3.quadraticBezierTo(size.width * 0.25, size.height * 0.87, p2x * 0.5, size.height * (40 / 45));
+    path3.quadraticBezierTo(size.width * 0.25, size.height * 0.88, 0, size.height * (33 / 45));
+    path3.lineTo(0, size.height * (2 / 3));
+    //path3.lineTo(0.0, size.height * (2 / 3));
 
     var whitepath = Path();
     whitepath.lineTo(0, size.height * (10 / 15));
@@ -174,7 +179,7 @@ class CurvePainter extends CustomPainter {
     canvas.drawShadow(path1, Colors.black, 6.0, false);
     canvas.drawPath(path1, paint1);
     canvas.drawPath(path3, paint2);
-    canvas.drawPath(whitepath, whitepaint);
+    //canvas.drawPath(whitepath, whitepaint);
   }
 
   @override
