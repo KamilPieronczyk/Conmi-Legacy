@@ -1,4 +1,5 @@
 import 'package:conmi/screens/budget/main/BudgetSumTopBox.dart';
+import 'package:conmi/screens/budget/main/BudgetsListTile.dart';
 import 'package:conmi/widgets/RectGradientTopBar.dart';
 import 'package:flutter/material.dart';
 
@@ -15,7 +16,12 @@ class BudgetMain extends StatelessWidget {
       body: Column(
         children: [
           BudgetSumTopBox(),
-          Text('test'),
+          Expanded(
+            child: ListView(
+              children: List.generate(3, (index) => BudgetListTile()),
+              padding: EdgeInsets.fromLTRB(18, 18, 18, 0),
+            ),
+          ),
         ],
       ),
     );
