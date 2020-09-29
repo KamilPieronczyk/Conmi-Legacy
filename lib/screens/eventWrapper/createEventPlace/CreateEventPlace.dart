@@ -16,7 +16,7 @@ class CreateEventPlace extends StatelessWidget {
     return Scaffold(
       appBar: RectGradientTopBar(
         title: "Dodaj miejsce",
-        onPressedBack: () => {},
+        onPressedBack: () => goBack(),
       ),
       body: CreateEventPlaceBody(),
     );
