@@ -1,4 +1,4 @@
-import 'package:conmi/screens/budget/main/CircleIcon.dart';
+import 'package:conmi/screens/eventWrapper/budget/main/CircleIcon.dart';
 import 'package:conmi/widgets/ConmiFontStyle.dart';
 import 'package:conmi/widgets/Shadow.dart';
 import 'package:flutter/material.dart';

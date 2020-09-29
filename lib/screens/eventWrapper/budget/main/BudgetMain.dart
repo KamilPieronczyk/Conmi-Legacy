@@ -1,5 +1,6 @@
-import 'package:conmi/screens/budget/main/BudgetSumTopBox.dart';
-import 'package:conmi/screens/budget/main/BudgetsListTile.dart';
+
+import 'package:conmi/screens/eventWrapper/budget/main/BudgetSumTopBox.dart';
+import 'package:conmi/screens/eventWrapper/budget/main/BudgetsListTile.dart';
 import 'package:conmi/widgets/RectGradientTopBar.dart';
 import 'package:flutter/material.dart';
 

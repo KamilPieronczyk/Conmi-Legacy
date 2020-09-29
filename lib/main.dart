@@ -1,10 +1,9 @@
 import 'package:conmi/screens/authWrapper/AuthWrapper.dart';
-import 'package:conmi/screens/budget/addNewBudget/AddNewBudged.dart';
-import 'package:conmi/screens/budget/main/BudgetMain.dart';
 import 'package:conmi/screens/createEvent/bloc/CreateEventBloc.dart';
 import 'package:conmi/screens/createEvent/createEventStep2/CreateEventStep2.dart';
 import 'package:conmi/screens/createEvent/createEventStep1/CreateEventStep1.dart';
 import 'package:conmi/screens/createEvent/createEventStep3/CreateEventStep3.dart';
+import 'package:conmi/screens/eventWrapper/budget/addNewBudget/AddNewBudged.dart';
 import 'package:conmi/widgets/BottomTabBarLayout.dart';
 import 'package:conmi/utils/Colors.dart';
 import 'package:firebase_analytics/firebase_analytics.dart';
