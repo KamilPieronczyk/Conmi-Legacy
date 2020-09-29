@@ -24,6 +24,14 @@ class ConmiColor {
   Color get blackText => Color.fromRGBO(0, 0, 0, 0.87);
   Color get graywhite => fromHex(_graywhite);
 
+  final gradients = {
+    'primary': [Color.fromRGBO(94, 189, 180, 1), Color.fromRGBO(114, 154, 240, 1)],
+    'red': [Color.fromRGBO(255, 153, 102, 1), Color.fromRGBO(255, 94, 98, 1)],
+    'pink': [Color.fromRGBO(245, 145, 242, 1), Color.fromRGBO(94, 189, 180, 1)],
+    'orange': [Color.fromRGBO(253, 200, 48, 1), Color.fromRGBO(243, 115, 53, 1)],
+    'purple': [Color.fromRGBO(60, 16, 83, 1), Color.fromRGBO(173, 83, 137, 1)],
+  };
+
   static fromHex(String hexString) {
     final buffer = StringBuffer();
     if (hexString.length == 6 || hexString.length == 7) buffer.write('ff');
