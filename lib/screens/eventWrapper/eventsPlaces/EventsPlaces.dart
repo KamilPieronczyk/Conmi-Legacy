@@ -1,6 +1,8 @@
 import 'package:conmi/utils/Colors.dart';
 import 'package:conmi/utils/EventIcons.dart';
+import 'package:conmi/widgets/ConmiFontStyle.dart';
 import 'package:conmi/widgets/RectGradientTopBar.dart';
+import 'package:conmi/widgets/RoundedWhiteContainer.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
 
@@ -47,9 +49,131 @@ class _EventsPlacesBodyState extends State<EventsPlacesBody> {
           ),
           Expanded(
             flex: 6,
-            child: Container(),
+            child: TopLocalizations(),
           )
         ],
+      ),
+    );
+  }
+}
+
+class TopLocalizations extends StatelessWidget {
+  const TopLocalizations({
+    Key key,
+  }) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      child: Center(
+        child: Padding(
+          padding: const EdgeInsets.fromLTRB(10, 50, 10, 50),
+          child: Row(
+            children: [
+              buildTopLocalizationCard(),
+              buildTopLocalizationCard(offset: Offset(0, -30)),
+              buildTopLocalizationCard(offset: Offset(0, 20)),
+            ],
+          ),
+        ),
+      ),
+    );
+  }
+
+  Widget buildTopLocalizationCard(
+      {String icon: 'cake',
+      String name = 'name',
+      String gradient: 'primary',
+      bool selected: false,
+      Offset offset: Offset.zero}) {
+    return Expanded(
+      child: Transform.translate(
+        offset: offset,
+        child: Padding(
+          padding: const EdgeInsets.symmetric(horizontal: 8),
+          child: AspectRatio(
+            aspectRatio: 90 / 120,
+            child: Container(
+              child: Stack(
+                children: [
+                  Container(
+                    decoration: BoxDecoration(
+                      gradient: LinearGradient(
+                        colors: ConmiColor().gradients[gradient],
+                        begin: Alignment.bottomLeft,
+                        end: Alignment.topRight,
+                      ),
+                      borderRadius: BorderRadius.circular(14.0),
+                    ),
+                    child: Column(
+                      children: [
+                        Center(
+                          child: Padding(
+                            padding: const EdgeInsets.only(top: 30, bottom: 20),
+                            child: Container(
+                              width: 50,
+                              height: 50,
+                              decoration: BoxDecoration(
+                                shape: BoxShape.circle,
+                                border: Border.all(
+                                  width: 5,
+                                  color: Colors.white30,
+                                ),
+                              ),
+                              child: Icon(
+                                eventIcons[icon],
+                                color: Colors.white,
+                              ),
+                            ),
+                          ),
+                        ),
+                        Container(
+                          alignment: Alignment.center,
+                          padding: EdgeInsets.only(bottom: 20),
+                          child: Text(
+                            name.toUpperCase(),
+                            style: TextStyle(
+                              color: Colors.white,
+                              fontSize: 12,
+                              fontWeight: FontWeight.w500,
+                            ),
+                          ),
+                        ),
+                      ],
+                      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                      mainAxisSize: MainAxisSize.max,
+                    ),
+                  ),
+                  Positioned.fill(
+                    child: Align(
+                      alignment: Alignment.topCenter,
+                      child: Transform.translate(
+                        offset: Offset(0, -20),
+                        child: RoundedWhiteContainer(
+                          child: Padding(
+                            padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 8),
+                            child: Row(
+                              children: [
+                                Padding(
+                                  padding: const EdgeInsets.only(right: 8),
+                                  child: Icon(Icons.group),
+                                ),
+                                ConmiFontStyle.robotoMedium16('4'),
+                              ],
+                              mainAxisAlignment: MainAxisAlignment.center,
+                              mainAxisSize: MainAxisSize.min,
+                              crossAxisAlignment: CrossAxisAlignment.center,
+                            ),
+                          ),
+                        ),
+                      ),
+                    ),
+                  ),
+                ],
+              ),
+            ),
+          ),
+        ),
       ),
     );
   }
