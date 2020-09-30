@@ -33,8 +33,40 @@ class EventsPlacesBody extends StatefulWidget {
 }
 
 class _EventsPlacesBodyState extends State<EventsPlacesBody> {
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      child: Column(
+        children: [
+          SizedBox(
+            height: 30,
+          ),
+          Expanded(
+            flex: 6,
+            child: EventsCarousel(),
+          ),
+          Expanded(
+            flex: 6,
+            child: Container(),
+          )
+        ],
+      ),
+    );
+  }
+}
+
+class EventsCarousel extends StatefulWidget {
+  const EventsCarousel({
+    Key key,
+  }) : super(key: key);
+
+  @override
+  _EventsCarouselState createState() => _EventsCarouselState();
+}
+
+class _EventsCarouselState extends State<EventsCarousel> {
   PageController controller;
-  int currentpage = 0;
+  int currentpage = 1;
 
   @override
   void initState() {
@@ -42,7 +74,7 @@ class _EventsPlacesBodyState extends State<EventsPlacesBody> {
     controller = new PageController(
       initialPage: currentpage,
       keepPage: false,
-      viewportFraction: 1.0,
+      viewportFraction: 0.5,
     );
   }
 
@@ -54,121 +86,101 @@ class _EventsPlacesBodyState extends State<EventsPlacesBody> {
 
   @override
   Widget build(BuildContext context) {
-    return Column(
-      children: [
-        Expanded(
-          flex: 380,
-          child: PageView.builder(
-            onPageChanged: (value) {
-              setState(() {
-                currentpage = value;
-              });
-            },
-            controller: controller,
-            itemCount: 3,
-            itemBuilder: (context, index) => buildCard(),
-          ),
-        ),
-        Expanded(
-          flex: 275,
-          child: Container(),
-        )
-      ],
+    return PageView(
+      onPageChanged: (value) {
+        setState(() {
+          currentpage = value;
+        });
+      },
+      controller: controller,
+      children: List.generate(3, (index) => builder(index)),
     );
   }
 
-  builder(int index) {
+  builder(int index, {String icon: 'cake', String name = '', String gradient: 'primary', bool selected: false}) {
     return new AnimatedBuilder(
       animation: controller,
       builder: (context, child) {
-        double value = 1.0;
+        double value = currentpage == index ? 1.0 : 0.5;
         if (controller.position.haveDimensions) {
           value = controller.page - index;
           value = (1 - (value.abs() * .5)).clamp(0.0, 1.0);
         }
-
         return new Center(
-          child: new SizedBox(
-            height: Curves.easeOut.transform(value) * 300,
-            width: Curves.easeOut.transform(value) * 250,
+          child: Transform.scale(
+            scale: value,
             child: child,
           ),
         );
       },
-      child: buildCard(),
+      child: buildCard(icon: icon, name: name, gradient: gradient, selected: selected),
     );
   }
 
-  Widget buildCard() {
-    return Transform.scale(
-      scale: 0.8,
-      child: Container(
-        height: 200,
-        width: 200,
-        decoration: BoxDecoration(
-          gradient: LinearGradient(
-            colors: ConmiColor().gradients['primary'],
-            begin: Alignment.bottomLeft,
-            end: Alignment.topRight,
-          ),
-          borderRadius: BorderRadius.circular(14.0),
+  Widget buildCard({String icon: 'cake', String name = '', String gradient: 'primary', bool selected: false}) {
+    return Container(
+      decoration: BoxDecoration(
+        gradient: LinearGradient(
+          colors: ConmiColor().gradients[gradient],
+          begin: Alignment.bottomLeft,
+          end: Alignment.topRight,
         ),
-        child: Column(
-          children: [
-            Expanded(
-              child: Column(
-                children: [
-                  Center(
-                    child: Padding(
-                      padding: EdgeInsets.only(top: 40),
-                      child: Container(
-                        width: 150,
-                        height: 150,
-                        decoration: BoxDecoration(
-                          shape: BoxShape.circle,
-                          border: Border.all(
-                            width: 5,
-                            color: Colors.white30,
-                          ),
-                        ),
-                        child: Icon(
-                          eventIcons['cake'],
-                          size: 85,
-                          color: Colors.white,
+        borderRadius: BorderRadius.circular(14.0),
+      ),
+      child: Column(
+        children: [
+          Expanded(
+            child: Column(
+              children: [
+                Center(
+                  child: Padding(
+                    padding: EdgeInsets.only(top: 30),
+                    child: Container(
+                      width: 150,
+                      height: 150,
+                      decoration: BoxDecoration(
+                        shape: BoxShape.circle,
+                        border: Border.all(
+                          width: 5,
+                          color: Colors.white30,
                         ),
                       ),
-                    ),
-                  ),
-                  Container(
-                    alignment: Alignment.center,
-                    padding: EdgeInsets.only(bottom: 20),
-                    child: Text(
-                      'text',
-                      style: TextStyle(
+                      child: Icon(
+                        eventIcons[icon],
+                        size: 85,
                         color: Colors.white,
-                        fontSize: 25,
-                        fontWeight: FontWeight.w500,
                       ),
                     ),
                   ),
-                ],
-                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                mainAxisSize: MainAxisSize.max,
+                ),
+                Container(
+                  alignment: Alignment.center,
+                  child: Text(
+                    name.toUpperCase(),
+                    style: TextStyle(
+                      color: Colors.white,
+                      fontSize: 25,
+                      fontWeight: FontWeight.w500,
+                    ),
+                  ),
+                ),
+              ],
+              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+              mainAxisSize: MainAxisSize.max,
+            ),
+          ),
+          Container(
+            alignment: Alignment.bottomRight,
+            child: Padding(
+              padding: const EdgeInsets.only(bottom: 15, right: 15),
+              child: Icon(
+                selected ? Icons.favorite : Icons.favorite_border,
+                size: 36,
+                color: selected ? Color.fromRGBO(47, 230, 213, 1) : Colors.white30,
               ),
             ),
-            Container(
-              alignment: Alignment.bottomRight,
-              child: Padding(
-                padding: const EdgeInsets.only(bottom: 15, right: 15),
-                child: Icon(
-                  Icons.favorite,
-                  size: 36,
-                  color: Color.fromRGBO(47, 230, 213, 1),
-                ),
-              ),
-            )
-          ],
-        ),
+          )
+        ],
       ),
     );
   }
