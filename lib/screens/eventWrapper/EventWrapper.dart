@@ -1,6 +1,7 @@
 import 'package:conmi/screens/eventWrapper/createEventPlace/CreateEventPlace.dart';
 import 'package:conmi/screens/eventWrapper/eventHome/EventHome.dart';
 import 'package:conmi/screens/eventWrapper/eventParticipants/EventParticipants.dart';
+import 'package:conmi/screens/eventWrapper/eventsPlaces/EventsPlaces.dart';
 import 'package:conmi/widgets/BottomTabBarLayout.dart';
 import 'package:flutter/material.dart';
 
@@ -22,7 +23,7 @@ class EventWrapper extends StatelessWidget {
       iconList: iconList,
       floatingActionButtonIcon: Icons.add,
       floatingActionButtonOnPressed: () => print("floatingActionButtonOnPressed"),
-      screenList: [EventParticipants(), EventHome(), CreateEventPlace()],
+      screenList: [EventParticipants(), EventHome(), EventsPlaces()],
     );
   }
 }
