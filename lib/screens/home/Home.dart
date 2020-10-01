@@ -45,8 +45,8 @@ class NotificationArea extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return DraggableScrollableSheet(
-      initialChildSize: 0.37,
-      minChildSize: 0.37,
+      initialChildSize: 0.41,
+      minChildSize: 0.41,
       maxChildSize: 0.88,
       builder: (context, scrollController) => Container(
         color: ConmiColor().graywhite,
@@ -195,7 +195,7 @@ class EventsCarousel extends StatelessWidget {
               child: Align(
                 alignment: Alignment.bottomCenter,
                 child: Transform.translate(
-                  offset: Offset(0, 0),
+                  offset: Offset(0, -25),
                   child: RoundedWhiteContainer(
                     child: Padding(
                       padding: const EdgeInsets.fromLTRB(30, 8, 30, 12),
