@@ -1,3 +1,4 @@
+import 'package:conmi/screens/authWrapper/AuthWrapper.dart';
 import 'package:conmi/utils/Colors.dart';
 import 'package:conmi/widgets/ProfileSettingsWave.dart';
 import 'package:flutter/material.dart';
@@ -52,7 +53,7 @@ class MyApp extends StatelessWidget {
                 primarySwatch: Colors.blue,
                 visualDensity: VisualDensity.adaptivePlatformDensity,
               ),
-              home: ProfileSettingsWave(),
+              home: AuthWrapper(),
             );
           }
           return MaterialApp(
