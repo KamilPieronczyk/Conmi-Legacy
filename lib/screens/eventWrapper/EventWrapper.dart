@@ -1,4 +1,5 @@
 import 'package:conmi/screens/eventWrapper/createEventPlace/CreateEventPlace.dart';
+import 'package:conmi/screens/eventWrapper/eventDatePicker/EventDatePicker.dart';
 import 'package:conmi/screens/eventWrapper/eventHome/EventHome.dart';
 import 'package:conmi/screens/eventWrapper/eventParticipants/EventParticipants.dart';
 import 'package:conmi/screens/eventWrapper/eventsPlaces/EventsPlaces.dart';
@@ -23,7 +24,7 @@ class EventWrapper extends StatelessWidget {
       iconList: iconList,
       floatingActionButtonIcon: Icons.add,
       floatingActionButtonOnPressed: () => print("floatingActionButtonOnPressed"),
-      screenList: [EventParticipants(), EventHome(), EventsPlaces()],
+      screenList: [EventParticipants(), EventHome(), EventsPlaces(), EventDatePicker()],
     );
   }
 }
