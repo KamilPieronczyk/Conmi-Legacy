@@ -1,8 +1,24 @@
+import 'package:conmi/models/PickedDates.dart';
 import 'package:conmi/utils/Colors.dart';
+import 'package:conmi/widgets/ConmiFontStyle.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 
-class Calendar extends StatelessWidget {
+class Calendar extends StatefulWidget {
   const Calendar({Key key}) : super(key: key);
+
+  @override
+  _CalendarState createState() => _CalendarState();
+}
+
+class _CalendarState extends State<Calendar> {
+  int _month = 1;
+
+  void setMonth(int month) {
+    setState(() => _month = month);
+  }
+
+  int get month => _month;
 
   @override
   Widget build(BuildContext context) {
@@ -11,11 +27,13 @@ class Calendar extends StatelessWidget {
         children: [
           Expanded(
             flex: 1,
-            child: MonthsPicker(),
+            child: MonthsPicker(
+              setMonth: setMonth,
+            ),
           ),
           Expanded(
             flex: 4,
-            child: Text(""),
+            child: DatePicker(month: month),
           ),
         ],
       ),
@@ -23,9 +41,63 @@ class Calendar extends StatelessWidget {
   }
 }
 
-class MonthsPicker extends StatefulWidget {
-  const MonthsPicker({Key key}) : super(key: key);
+class DatePicker extends StatelessWidget {
+  DatePicker({
+    Key key,
+    this.month,
+  }) : super(key: key);
 
+  final month;
+
+  List<String> days = ['mon', 'tue', 'wed', 'thu', 'fri', 'sat', 'sun'];
+
+  @override
+  Widget build(BuildContext context) {
+    print(month);
+    return Container(
+      child: Consumer<PickedDates>(
+        builder: (context, value, child) => child,
+        child: GridView.builder(
+          physics: NeverScrollableScrollPhysics(),
+          shrinkWrap: true,
+          gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+            crossAxisCount: 7,
+            mainAxisSpacing: 0,
+            crossAxisSpacing: 9.0,
+          ),
+          itemCount: 7 * 7,
+          itemBuilder: (context, index) => _buildCalendar(context, index),
+        ),
+      ),
+    );
+  }
+
+  _buildCalendar(context, index) {
+    if (index < 7) return _getWeekDay(index);
+    return _getMonthDay(context, index - 7);
+  }
+
+  _getWeekDay(index) {
+    return Container(
+      alignment: Alignment.center,
+      child: ConmiFontStyle.robotoMedium14(days[index].toUpperCase()),
+    );
+  }
+
+  _getMonthDay(context, number) {
+    var startDate = DateTime(2020, month, 1).subtract(Duration(days: DateTime(2020, month, 1).weekday - 1));
+    var day = startDate.add(Duration(days: number));
+    return Container(
+      alignment: Alignment.center,
+      child: ConmiFontStyle.robotoMedium14(day.day.toString()),
+    );
+  }
+}
+
+class MonthsPicker extends StatefulWidget {
+  MonthsPicker({Key key, this.setMonth}) : super(key: key);
+
+  final ValueChanged<int> setMonth;
   @override
   _MonthsPickerState createState() => _MonthsPickerState();
 }
@@ -57,6 +129,7 @@ class _MonthsPickerState extends State<MonthsPicker> {
     return PageView(
       onPageChanged: (value) {
         setState(() {
+          widget.setMonth(value);
           currentpage = value;
         });
       },

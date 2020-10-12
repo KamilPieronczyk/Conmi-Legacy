@@ -1,3 +1,4 @@
+import 'package:conmi/models/PickedDates.dart';
 import 'package:conmi/screens/authWrapper/AuthWrapper.dart';
 import 'package:conmi/utils/Colors.dart';
 import 'package:conmi/widgets/ProfileSettingsWave.dart';
@@ -12,7 +13,7 @@ void main() {
   runApp(
     MultiProvider(
       providers: [
-        ChangeNotifierProvider(create: (context) => CreateEventData()),
+        new ChangeNotifierProvider(create: (context) => CreateEventData()),
       ],
       child: MyApp(),
     ),

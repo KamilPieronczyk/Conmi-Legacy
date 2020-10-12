@@ -30,6 +30,7 @@ class EventDatePickerBody extends StatelessWidget {
       child: Column(
         children: [
           Expanded(
+            flex: 2,
             child: Calendar(),
           ),
           Expanded(
